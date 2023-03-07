@@ -1,4 +1,4 @@
-import { StringValueObjectBase} from 'src/shared/sofka/value-objets/string.value.object'
+import { StringValueObjectBase} from 'src/shared/value-objets/string.value.object'
 /**
  * Esta es una clase que representa un objeto de valor para el nombre de un artículo.
  *

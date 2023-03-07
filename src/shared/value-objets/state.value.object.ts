@@ -1,6 +1,6 @@
-import { isBoolean } from './../../validations/is-boolean.validate';
-import { ValueObjectBase } from "../bases";
-import { IErrorValueObject } from '../interface';
+import { isBoolean } from '../validations/is-boolean.validate';
+import { ValueObjectBase } from "../sofka/bases";
+import { IErrorValueObject } from '../sofka/interface';
 import { IsEmpty } from 'src/shared/validations/is-empty.validations';
 
 

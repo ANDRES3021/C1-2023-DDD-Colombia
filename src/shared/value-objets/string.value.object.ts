@@ -1,7 +1,7 @@
-import { StringMaxLength } from './../../validations/is-max-string.validate';
-import { IErrorValueObject } from './../interface/error-object-value.interface';
-import { IsEmpty } from './../../validations/is-empty.validations';
-import { ValueObjectBase } from "../bases";
+import { StringMaxLength } from '../validations/is-max-string.validate';
+import { IErrorValueObject } from '../sofka/interface/error-object-value.interface';
+import { IsEmpty } from '../validations/is-empty.validations';
+import { ValueObjectBase } from "../sofka/bases";
 import { StringMinLength } from 'src/shared/validations/is-min-string.validate';
 
 

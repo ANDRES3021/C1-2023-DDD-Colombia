@@ -1,4 +1,4 @@
-import {  StateValueObjectBase } from "src/shared/sofka/value-objets/state.value.object";
+import {  StateValueObjectBase } from "src/shared/value-objets/state.value.object";
 
 /**
  * Esta es una clase que representa un objeto de valor para un estado booleano.
