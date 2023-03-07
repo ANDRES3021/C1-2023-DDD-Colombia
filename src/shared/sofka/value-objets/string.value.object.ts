@@ -19,9 +19,12 @@ export abstract class StringValueObjectBase extends ValueObjectBase<string>{
         super(value);
     }
     validateData(): void {
-        this.IsEmpty()
-        this.IsStringMax()
-        this.IsStringMin()
+        if (this.value){
+            this.IsEmpty()
+            this.IsStringMax()
+            this.IsStringMin()
+        }
+        
     }
     private IsEmpty(): void {
         if (IsEmpty(this.value)) {

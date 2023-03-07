@@ -16,7 +16,7 @@ export class ItemDomainEntity implements IItemDomainEntity{
     name?: string | NameItemValueObject;
     description?: string | DescriptionItemValueObject;
     price?: number | PriceValueObject;
-    productionOrders: IproductionOrdenDomainEntity;
+    productionOrders: IproductionOrdenDomainEntity[];
     constructor(data?: IItemDomainEntity) {
         if(data?.itemId) this.itemId = data.itemId;
         if(data?.name) this.name = data.name;

@@ -17,7 +17,7 @@ import { IproductionOrdenDomainEntity } from './interfaces/production-order.doma
  */
 export class ProductOrderDomainEntity implements IproductionOrdenDomainEntity{
     productionOrderId?: string | ProductionOrderIdValueObject ;
-    itemids: IItemDomainEntity;
+    itemids: IItemDomainEntity[];
     date?: Date | DateValueObject ;
     name?: string | NameItemValueObject ;
     price?: number | PriceValueObject ;

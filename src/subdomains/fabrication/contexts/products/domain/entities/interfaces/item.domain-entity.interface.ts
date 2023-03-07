@@ -15,5 +15,5 @@ export interface IItemDomainEntity {
     name? : string | NameItemValueObject;
     description? : string | DescriptionItemValueObject;
     price? : number | PriceValueObject;
-    productionOrders: IproductionOrdenDomainEntity;
+    productionOrders: IproductionOrdenDomainEntity[];
 }

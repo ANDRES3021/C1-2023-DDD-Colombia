@@ -15,7 +15,7 @@ import { IItemDomainEntity } from "./item.domain-entity.interface";
  */
 export interface IproductionOrdenDomainEntity {
     productionOrderId? : string | ProductionOrderIdValueObject
-    itemids: IItemDomainEntity;
+    itemids: IItemDomainEntity[];
     date? : Date | DateValueObject;
     name? : string | NameItemValueObject;
     price? : number | PriceValueObject;

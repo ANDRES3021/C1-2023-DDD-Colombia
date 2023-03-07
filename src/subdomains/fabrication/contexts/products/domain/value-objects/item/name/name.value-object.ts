@@ -11,3 +11,4 @@ export class NameItemValueObject extends StringValueObjectBase {
         super(value)
     }
 }
+console.log(new NameItemValueObject('ans'))

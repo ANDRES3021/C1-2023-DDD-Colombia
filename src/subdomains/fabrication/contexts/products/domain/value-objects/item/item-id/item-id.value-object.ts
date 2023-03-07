@@ -11,3 +11,4 @@ export class ItemIdValueObject extends UUIDValueObjectBase {
         super(value)
     }
 }
+console.log(new ItemIdValueObject('no es id'))

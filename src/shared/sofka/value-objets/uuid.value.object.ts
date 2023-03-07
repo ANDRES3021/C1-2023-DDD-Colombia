@@ -20,16 +20,16 @@ export abstract class UUIDValueObjectBase extends ValueObjectBase<string> {
         this.isUUID()
     }
     private isUUID(): void {
-        if(IsUUID4(this.value)) {
+        if(!IsUUID4(this.value)) {
             this.setError({
-                field : 'name',
+                field : 'UUID',
                 message: 'este valor no es un UUID'
             } as IErrorValueObject);
         }
     }
     private IsEmpty(): void {
         if (IsEmpty(this.value)) {
-            this.setError({field: 'name', message:'no puedes enviar este campo vacio'} as IErrorValueObject)
+            this.setError({field: 'UUID', message:'no puedes enviar este campo vacio'} as IErrorValueObject)
         }
     }
 }
