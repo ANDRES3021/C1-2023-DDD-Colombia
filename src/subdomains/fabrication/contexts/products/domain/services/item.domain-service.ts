@@ -10,6 +10,8 @@ import { ItemDomainEntity } from "../entities/item.domain-entity";
  */
 export interface IItemDomainService<entity extends ItemDomainEntity = IItemDomainEntity>{
     registerNewItem(itemId: string, name:string, description:string, price: number): Promise<entity>;
-    updateNewItemDetail(itemId: string, description?: string, price?: number): Promise<entity>;
+    updateNameNewItem(itemId: string, name:string): Promise<entity>;
+    updateDescriptionNewItem(itemId: string, description:string): Promise<entity>;
+    updatePriceNewItem(itemId: string, price:number): Promise<entity>;
     getItem(itemId: string): Promise<entity>;
 } 

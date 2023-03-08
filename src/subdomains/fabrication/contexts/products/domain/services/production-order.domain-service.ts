@@ -10,8 +10,8 @@ import { ProductionOrderDomainEntity } from './../entities/production-order.doma
 export interface IproductionOrderDomainService<Entity extends ProductionOrderDomainEntity = ProductionOrderDomainEntity> {
     getProductionOrder(ProductionOrderId: string): Promise<Entity>;
     registerProductionOrder(ProductionOrderId: string, date: Date, name: string, price: number, referencenumber: number, state: boolean, cancel: boolean): Promise<Entity>;
-    updateProductionOrderDetail(ProductionOrderId: string, data: { name?: string, price?: number, state?: boolean }): Promise<Entity>;
+    updateProductionOrderName(ProductionOrderId: string, name: string): Promise<Entity>;
     updatePriceProductionOrder(ProductionOrderId: string, price: number): Promise<Entity>;
     updatecancelProduccionOrder(ProductionOrderId: string, cancel?: boolean): Promise<Entity>;
-
+    updatestateProduccionOrder(ProductionOrderId: string, state: boolean): Promise<Entity>;
 }
