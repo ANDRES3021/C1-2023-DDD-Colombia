@@ -22,5 +22,6 @@ export class ItemDomainEntity implements IItemDomainEntity{
         if(data?.name) this.name = data.name;
         if(data?.description) this.description = data.description;
         if(data?.price) this.price = data.price;
+        if(data?.productionOrders) this.productionOrders = data.productionOrders as IproductionOrdenDomainEntity[];
     }
 }

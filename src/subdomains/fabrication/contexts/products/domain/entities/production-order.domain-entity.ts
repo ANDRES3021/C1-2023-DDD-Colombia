@@ -32,5 +32,6 @@ export class ProductionOrderDomainEntity implements IproductionOrdenDomainEntity
         if(data?.ReferenceNumber) this.ReferenceNumber = data.ReferenceNumber;
         if(data?.state) this.state = data.state;
         if(data?.cancel) this.cancel = data.cancel;
+        if(data?.itemids) this.itemids = data.itemids as IItemDomainEntity[];
     }
 }

@@ -1,16 +1,16 @@
-import { ProductOrderDomainEntity } from './../entities/production-order.domain-entity';
+import { ProductionOrderDomainEntity } from './../entities/production-order.domain-entity';
 /**
  * esta es una interface que contiene todas las acciones de mi orden de produccion
  *
  * @export
  * @interface IproductionOrderDomainService
- * @template entity
+ * @template Entity
  */
-export interface IproductionOrderDomainService<entity extends ProductOrderDomainEntity> {
-    getProductionOrder(ProductionOrderId: string): Promise<entity>;
-    registerProductionOrder(ProductionOrderId: string): Promise<entity>;
-    updateProductionOrderDetail(ProductionOrderId: string, name?: string , price?: number, state?: boolean): Promise<entity>;
-    updatePriceProductionOrder(ProductionOrderId: string): Promise<entity>;
-    updatecancelProduccionOrder(ProductionOrderId: string, cancel?: boolean): Promise<entity>;
+export interface IproductionOrderDomainService<Entity extends ProductionOrderDomainEntity = ProductionOrderDomainEntity> {
+    getProductionOrder(ProductionOrderId: string): Promise<Entity>;
+    registerProductionOrder(ProductionOrderId: string): Promise<Entity>;
+    updateProductionOrderDetail(ProductionOrderId: string, data: { name?: string, price?: number, state?: boolean }): Promise<Entity>;
+    updatePriceProductionOrder(ProductionOrderId: string): Promise<Entity>;
+    updatecancelProduccionOrder(ProductionOrderId: string, cancel?: boolean): Promise<Entity>;
 
 }
