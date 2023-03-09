@@ -6,7 +6,7 @@ import { isGreaterZero } from './../../../../../../../../shared/validations/is-g
  *
  * @export
  * @class PriceValueObject
- * @extends {ValueObjectBase<number>}
+ * @extends {ValueObjectBase<number>} extiende la clase ValueObjectBase con un tipo de valor number
  */
 export class PriceValueObject extends ValueObjectBase<number>{
     

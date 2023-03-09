@@ -4,7 +4,7 @@ import { StringValueObjectBase } from 'src/shared/value-objets/string.value.obje
  *
  * @export
  * @class DescriptionItemValueObject
- * @extends {StringValueObjectBase}
+ * @extends {StringValueObjectBase} extiende la clase StringValueObjectBase
  */
 export class DescriptionItemValueObject extends StringValueObjectBase {
     constructor(value: string) {

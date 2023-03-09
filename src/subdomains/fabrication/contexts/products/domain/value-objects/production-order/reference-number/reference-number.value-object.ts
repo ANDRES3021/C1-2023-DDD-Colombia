@@ -7,7 +7,7 @@ import { isGreaterZero } from "src/shared/validations/is-greater-zero.validation
  *
  * @export
  * @class ReferenceNumberValueObject
- * @extends {ValueObjectBase<number>}
+ * @extends {ValueObjectBase<number>} extiende la clase ValueObjectBase con un tipo de valor number
  */
 export class ReferenceNumberValueObject extends ValueObjectBase<number>{
     

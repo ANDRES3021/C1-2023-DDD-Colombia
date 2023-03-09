@@ -6,7 +6,7 @@ import { StateValueObjectBase } from "src/shared/value-objets/state.value.object
  *
  * @export
  * @class CancelValueObject
- * @extends {StateValueObjectBase}
+ * @extends {StateValueObjectBase} extiende la clase StateValueObjectBase
  */
 export class CancelValueObject extends StateValueObjectBase {
     constructor(value: boolean){

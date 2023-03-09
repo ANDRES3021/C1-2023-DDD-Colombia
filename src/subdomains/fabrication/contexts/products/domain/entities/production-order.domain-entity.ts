@@ -13,7 +13,7 @@ import { IproductionOrdenDomainEntity } from './interfaces/production-order.doma
  *
  * @export
  * @class ProductOrderDomainEntity
- * @implements {IproductionOrdenDomainEntity}
+ * @implements {IproductionOrdenDomainEntity} implementa la interfaz IproductionOrdenDomainEntity
  */
 export class ProductionOrderDomainEntity implements IproductionOrdenDomainEntity{
     productionOrderId?: string | ProductionOrderIdValueObject ;

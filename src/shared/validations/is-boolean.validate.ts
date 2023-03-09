@@ -1,9 +1,10 @@
+ 
  /**
- *
- *Verifica si un valor es de tipo booleano.
- * @param {*} value
- * @return {*}  {boolean}
- */
+  *
+  *
+  * @param  value valor a validar
+  * @return {boolean} true si es booleano, false si no lo es
+  */
  export const isBoolean = (value: any): boolean => {
     if (typeof(value) === 'boolean') {
       return true;

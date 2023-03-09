@@ -8,7 +8,7 @@ import { IproductionOrdenDomainEntity } from "./production-order.domain-entity.i
  * Interfaz que define las propiedades que debe tener una entidad de Item en el dominio del negocio.
  *
  * @export
- * @interface IItemDomainEntity
+ * @interface IItemDomainEntity 
  */
 export interface IItemDomainEntity {
     itemId? : string | ItemIdValueObject;

@@ -6,7 +6,7 @@ import { IsEmpty } from 'src/shared/validations/is-empty.validations';
  *
  * @export
  * @class DateValueObject
- * @extends {ValueObjectBase<Date>}
+ * @extends {ValueObjectBase<Date>} extiende la clase ValueObjectBase con un tipo de valor Date
  */
 export class DateValueObject extends ValueObjectBase<Date>{
     constructor(value:Date) {

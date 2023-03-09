@@ -5,7 +5,7 @@ import {  StateValueObjectBase } from "src/shared/value-objets/state.value.objec
  *
  * @export
  * @class StateValueObject
- * @extends {StateValueObjectBase}
+ * @extends {StateValueObjectBase} extiende la clase StateValueObjectBase
  */
 export class StateValueObject extends StateValueObjectBase {
     constructor(value: boolean){

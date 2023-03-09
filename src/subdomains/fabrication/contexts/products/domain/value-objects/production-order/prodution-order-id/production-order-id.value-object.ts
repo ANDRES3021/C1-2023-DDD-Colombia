@@ -5,7 +5,7 @@ import { UUIDValueObjectBase } from "src/shared/value-objets/uuid.value.object";
  *
  * @export
  * @class ProductionOrderIdValueObject
- * @extends {UUIDValueObjectBase}
+ * @extends {UUIDValueObjectBase} extiende la clase UUIDValueObjectBase
  */
 export class ProductionOrderIdValueObject extends UUIDValueObjectBase{
     constructor(value: string) {

@@ -2,7 +2,15 @@ import { AggregateRootException } from 'src/shared/sofka';
 import { GotProductionOrderEventPublisher } from '../../../../../events/publishers/got-productionorder.event-publisher';
 import { IproductionOrderDomainService } from '../../../../../services/production-order.domain-service';
 import { ProductionOrderDomainEntity } from './../../../../../entities/production-order.domain-entity';
-export const GetProductionOrderHelper = async (
+export /**
+ * helper para obtener una orden de produccion
+ *
+ * @param {string} productionid id de la orden de produccion
+ * @param {GotProductionOrderEventPublisher<ProductionOrderDomainEntity>} getProduction evento de obtencion de orden de produccion
+ * @param {(IproductionOrderDomainService | undefined)} productionService servicio de obtencion de orden de produccion
+ * @return {Promise<ProductionOrderDomainEntity>} promesa de orden de produccion obtenida
+ */
+const GetProductionOrderHelper = async (
     productionid : string,
     getProduction : GotProductionOrderEventPublisher<ProductionOrderDomainEntity>,
     productionService : IproductionOrderDomainService | undefined,

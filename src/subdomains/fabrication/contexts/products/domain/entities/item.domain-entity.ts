@@ -9,7 +9,7 @@ import { IproductionOrdenDomainEntity } from './interfaces/production-order.doma
  *
  * @export
  * @class ItemDomainEntity
- * @implements {IItemDomainEntity}
+ * @implements {IItemDomainEntity} implementa la interfaz IItemDomainEntity
  */
 export class ItemDomainEntity implements IItemDomainEntity{
     itemId?: string | ItemIdValueObject;

@@ -5,7 +5,15 @@ import { GotItemEventPublisher } from "../../../../../events/publishers/got-item
 import { IproductionOrderDomainService } from "../../../../../services/production-order.domain-service";
 import { IItemDomainService } from '../../../../../services/item.domain-service';
 
-export const GetItemHelper = async (
+export /**
+ * helper para obtener un item
+ *
+ * @param {string} ProductionOrderId id de la orden de produccion
+ * @param {GotItemEventPublisher<ItemDomainEntity>} getitem evento de obtencion de item
+ * @param {(IItemDomainService  | undefined)} getItemService servicio de obtencion de item
+ * @return {Promise<ItemDomainEntity>} promesa de item obtenido
+ */
+const GetItemHelper = async (
     ProductionOrderId: string,
     getitem: GotItemEventPublisher<ItemDomainEntity>,
     getItemService: IItemDomainService  | undefined,

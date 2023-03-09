@@ -12,7 +12,7 @@ import { StringMinLength } from 'src/shared/validations/is-min-string.validate';
  * @export
  * @abstract
  * @class StringValueObjectBase
- * @extends {ValueObjectBase<string>}
+ * @extends {ValueObjectBase<string>} extiende la clase ValueObjectBase con un tipo de valor string
  */
 export abstract class StringValueObjectBase extends ValueObjectBase<string>{
     constructor(value: string) {

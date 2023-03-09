@@ -3,7 +3,16 @@ import { ProductionOrderDomainEntity } from "../../../../../entities/production-
 import { UpdatePriceProductionOrderEventPublisher } from "../../../../../events/publishers/update-price-production-order.event-publisher";
 import { IproductionOrderDomainService } from "../../../../../services/production-order.domain-service";
 
-export const UpdatePiceProductionOrderHelper = async (
+export /**
+ * helper para actualizar el precio de una orden de produccion
+ *
+ * @param {string} ProductionOrderId id de la orden de produccion
+ * @param {number} price precio de la orden de produccion
+ * @param {UpdatePriceProductionOrderEventPublisher<ProductionOrderDomainEntity>} updateproductionprice evento de actualizacion de precio de orden de produccion
+ * @param {(IproductionOrderDomainService | undefined)} updatePriceService servicio de actualizacion de precio de orden de produccion
+ * @return {Promise<ProductionOrderDomainEntity>} promesa de orden de produccion actualizada
+ */
+const UpdatePiceProductionOrderHelper = async (
     ProductionOrderId: string,
     price: number,
     updateproductionprice: UpdatePriceProductionOrderEventPublisher<ProductionOrderDomainEntity>,

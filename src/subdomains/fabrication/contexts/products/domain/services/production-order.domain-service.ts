@@ -5,7 +5,7 @@ import { ProductionOrderDomainEntity } from './../entities/production-order.doma
  *
  * @export
  * @interface IproductionOrderDomainService
- * @template Entity
+ * @template Entity extiende la interface IproductionOrderDomainEntity
  */
 export interface IproductionOrderDomainService<Entity extends ProductionOrderDomainEntity = ProductionOrderDomainEntity> {
     getProductionOrder(ProductionOrderId: string): Promise<Entity>;

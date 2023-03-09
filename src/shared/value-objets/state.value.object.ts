@@ -11,8 +11,8 @@ import { IsEmpty } from 'src/shared/validations/is-empty.validations';
  * 
  * @export
  * @abstract
- * @class StateValueObjectBase
- * @extends {ValueObjectBase<boolean>}
+ * @class StateValueObjectBase 
+ * @extends {ValueObjectBase<boolean>} extiende la clase ValueObjectBase con un tipo de valor booleano
  */
 export abstract class StateValueObjectBase extends ValueObjectBase<boolean> {
     constructor(value: boolean) {

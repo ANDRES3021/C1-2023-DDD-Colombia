@@ -4,7 +4,21 @@ import { GotProductionOrderEventPublisher } from "../../../../../events/publishe
 import { RegisterProductionOrderEventPublisher } from "../../../../../events/publishers/registered-production-order.event-publisher";
 import { IproductionOrderDomainService } from "../../../../../services/production-order.domain-service";
 
-export const RegisterProductionOrderHelper = async (
+export /**
+ * helper para registrar una orden de produccion
+ *
+ * @param {string} ProductionOrderId id de la orden de produccion
+ * @param {Date} date fecha de la orden de produccion
+ * @param {string} name nombre de la orden de produccion
+ * @param {number} price precio de la orden de produccion
+ * @param {number} referencenumber numero de referencia de la orden de produccion
+ * @param {boolean} state estado de la orden de produccion
+ * @param {boolean} cancel cancelacion de la orden de produccion
+ * @param {RegisterProductionOrderEventPublisher<ProductionOrderDomainEntity>} registerProduction evento de registro de orden de produccion
+ * @param {(IproductionOrderDomainService | undefined)} productionService servicio de registro de orden de produccion
+ * @return {Promise<ProductionOrderDomainEntity>} promesa de orden de produccion registrada
+ */
+const RegisterProductionOrderHelper = async (
     ProductionOrderId: string, 
     date: Date, name: string, 
     price: number, 

@@ -11,7 +11,7 @@ import { IItemDomainEntity } from "./item.domain-entity.interface";
  * Interfaz que define las propiedades de una entidad de dominio de ítems.
  *
  * @export
- * @interface IproductionOrdenDomainEntity
+ * @interface IproductionOrdenDomainEntity 
  */
 export interface IproductionOrdenDomainEntity {
     productionOrderId? : string | ProductionOrderIdValueObject

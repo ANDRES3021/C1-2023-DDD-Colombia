@@ -9,7 +9,7 @@ import { IsEmpty } from 'src/shared/validations/is-empty.validations';
  * @export
  * @abstract
  * @class UUIDValueObjectBase
- * @extends {ValueObjectBase<string>}
+ * @extends {ValueObjectBase<string>} extiende la clase ValueObjectBase con un tipo de valor string
  */
 export abstract class UUIDValueObjectBase extends ValueObjectBase<string> {
     constructor(value: string) {

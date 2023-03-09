@@ -5,8 +5,8 @@ import { ItemDomainEntity } from "../entities/item.domain-entity";
  * esta es la interface que contiene todas las acciones de la entidad Item
  *
  * @export
- * @interface IItemDomainService
- * @template entity
+ * @interface IItemDomainService 
+ * @template entity extiende la interface IItemDomainEntity
  */
 export interface IItemDomainService<entity extends ItemDomainEntity = IItemDomainEntity>{
     registerNewItem(itemId: string, name:string, description:string, price: number): Promise<entity>;

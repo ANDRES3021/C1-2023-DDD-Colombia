@@ -87,42 +87,136 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
         this.updateNameNewItemEventPublisher = updateNameNewItemEventPublisher ?? this.updateNameNewItemEventPublisher;
         this.updateStateProductionOrderEventPublisher = updateStateProductionOrderEventPublisher ?? this.updateStateProductionOrderEventPublisher;
     }
+    /**
+     * Actualiza el nombre de una orden de producción.
+     *
+     *
+     * @param {string} ProductionOrderId  Identificador de la orden de producción a actualizar.
+     * @param {string} name  Nuevo nombre para la orden de producción.
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción actualizada.
+     * @memberof ProductionOrderAgregate
+     */
     updateNameProductionOrder(ProductionOrderId: string, name: string): Promise<ProductionOrderDomainEntity> {
         return UpdateNameProductionOrderHelper( ProductionOrderId, name, this.updateCancelProductionOrderEventPublisher, this.productionOrderService);
     }
+    /**
+     * Actualiza el precio de un ítem.
+     *
+     * @param {string} itemId  Identificador del ítem a actualizar.
+     * @param {number} price Nuevo precio para el ítem.
+     * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem actualizado.
+     * @memberof ProductionOrderAgregate 
+     */
     async updatePriceNewItem(itemId: string, price: number): Promise<IItemDomainEntity> {
         return UpdatePriceNewItemHelper(itemId, price, this.updatePriceNewItemEventPublisher, this.itemService);
     }
+    /**
+     * Actualiza la descripción de un ítem.
+     *
+     * @param {string} itemId Identificador del ítem a actualizar.
+     * @param {string} description Nueva descripción para el ítem.
+     * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem actualizado.
+     * @memberof ProductionOrderAgregate
+     */
     async updateDescriptionNewItem(itemId: string, description: string): Promise<IItemDomainEntity> {
         return UpdateDescriptionNewItemHelper(itemId, description, this.updateDescriptionNewItemEventPublisher, this.itemService);
     }
+    /**
+     * Actualiza el nombre de un ítem.
+     *
+     * @param {string} itemId  Identificador del ítem a actualizar.
+     * @param {string} name Nuevo nombre para el ítem.
+     * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem actualizado.
+     * @memberof ProductionOrderAgregate
+     */
     async updateNameNewItem(itemId: string, name: string): Promise<IItemDomainEntity> {
         return UpdateNameNewItemHelper(itemId, name, this.updateNameNewItemEventPublisher, this.itemService);
 
     }
+    /**
+     * Actualiza el estado de una orden de producción.
+     *
+     * @param {string} ProductionOrderId Identificador de la orden de producción a actualizar.
+     * @param {boolean} state Nuevo estado para la orden de producción
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción actualizada.
+     * @memberof ProductionOrderAgregate
+     */
     async updatestateProduccionOrder(ProductionOrderId: string, state: boolean): Promise<ProductionOrderDomainEntity> {
         return UpdateStateProductionOrderHelper(ProductionOrderId, state, this.updateStateProductionOrderEventPublisher, this.productionOrderService);
     }
 
+    /**
+     *
+     *
+     * @param {string} itemId
+     * @param {string} name
+     * @param {string} description
+     * @param {number} price
+     * @return {*}  {Promise<IItemDomainEntity>}
+     * @memberof ProductionOrderAgregate
+     */
     async registerNewItem(itemId: string, name: string, description: string, price: number): Promise<IItemDomainEntity> {
         return RegisterNewItemHelper(itemId, name, description, price, this.registerNewItemEventPublisher, this.itemService);
 
     }
+    /**
+     * Registra una nueva orden de producción.
+     *
+     * @param {string} ProductionOrderId ID del orden de produccion.
+     * @param {Date} date Fecha de la orden de producción.
+     * @param {string} name Nombre de la orden de producción.
+     * @param {number} price Precio de la orden de producción.
+     * @param {number} referencenumber Número de referencia de la orden de producción.
+     * @param {boolean} state Estado de la orden de producción.
+     * @param {boolean} cancel Cancelación de la orden de producción.
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción registrada.
+     * @memberof ProductionOrderAgregate
+     */
     async registerProductionOrder(ProductionOrderId: string, date: Date, name: string, price: number, referencenumber: number, state: boolean, cancel: boolean): Promise<ProductionOrderDomainEntity> {
        return RegisterProductionOrderHelper(ProductionOrderId, date, name, price, referencenumber, state, cancel, this.registerProductionOrderEventPublisher, this.productionOrderService,);
     }
 
+    /**
+     * Actualiza el precio de una orden de producción.
+     *
+     * @param {string} itemId Identificador del ítem a actualizar.
+     * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem.
+     * @memberof ProductionOrderAgregate
+     */
     async getItem(itemId: string): Promise<IItemDomainEntity> {
         return GetItemHelper(itemId, this.gotItemEventPublisher, this.itemService);
     }
+    /**
+     * Actualiza el precio de una orden de producción.
+     *
+     * @param {string} ProductionOrderId Identificador de la orden de producción a actualizar.
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción.
+     * @memberof ProductionOrderAgregate
+     */
     async getProductionOrder(ProductionOrderId: string): Promise<ProductionOrderDomainEntity> {
         return GetProductionOrderHelper(ProductionOrderId, this.gotProductionOrderEventPublisher, this.productionOrderService);
     }
 
 
+    /**
+     * Actualiza el precio de una orden de producción.
+     *
+     * @param {string} ProductionOrderId Identificador de la orden de producción a actualizar.
+     * @param {number} price Nuevo precio para la orden de producción.
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción actualizada.
+     * @memberof ProductionOrderAgregate
+     */
     async updatePriceProductionOrder(ProductionOrderId: string, price: number): Promise<ProductionOrderDomainEntity> {
         return UpdatePiceProductionOrderHelper(ProductionOrderId, price, this.updatePriceProductionOrderEventPublisher, this.productionOrderService);
     }
+    /**
+     * Actualiza el nombre de una orden de producción.
+     * 
+     * @param {string} ProductionOrderId Identificador de la orden de producción a actualizar.
+     * @param {boolean} cancel Nuevo nombre para la orden de producción.
+     * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción actualizada.
+     * @memberof ProductionOrderAgregate
+     */
     async updatecancelProduccionOrder(ProductionOrderId: string, cancel: boolean): Promise<ProductionOrderDomainEntity> {
         return UpdateCancelProductionOrderHelper(ProductionOrderId, cancel, this.updateCancelProductionOrderEventPublisher, this.productionOrderService);
 

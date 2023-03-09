@@ -1,8 +1,8 @@
  /**
  *Verifica si un valor es vacío o nulo.
  *
- * @param {(boolean | string | number | bigint | [] | object | null | undefined)} value
- * @return {*}  {boolean}
+ * @param {(boolean | string | number | bigint | [] | object | null | undefined)} value Valor a validar
+ * @return  {boolean} true si es vacío o nulo, false si no lo es
  */
  export const IsEmpty = (
     value: boolean | string | number | bigint | [] | object | null | undefined,
