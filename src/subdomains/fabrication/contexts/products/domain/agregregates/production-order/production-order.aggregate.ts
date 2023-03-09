@@ -1,3 +1,4 @@
+import { GetProductionOrderHelper } from './helpers/production-order-helpers/get-produccion-order/get-produccion-order.helper';
 import { AggregateRootException } from './../../../../../../../shared/sofka/exceptions/aggregate-root.exception';
 import { IItemDomainEntity } from "../../entities/interfaces/item.domain-entity.interface";
 import { ProductionOrderDomainEntity } from "../../entities/production-order.domain-entity";
@@ -14,12 +15,22 @@ import { UpdatedNameOrderProductionEventPublisher } from '../../events/publisher
 import { UpdatedStateOrderProductionEventPublisher } from '../../events/publishers/updated-state-order-production.event-publisher';
 import { UpdateDescriptionNewItemEventPublisher } from '../../events/publishers/updated- description-new-item.event-publishe';
 import { UpdatePriceNewItemEventPublisher } from '../../events/publishers/updated- price-new-item.event-publisher';
+import { RegisterProductionOrderHelper } from './helpers/production-order-helpers/register-production-order/register-production-order';
+import { UpdateCancelProductionOrderHelper } from './helpers/production-order-helpers/update-cancel-produccion-order/update-cancel-produccion-order.helper';
+import { UpdateNameProductionOrderHelper } from './helpers/production-order-helpers/update-name-producrion-order/update-name-producrion-order.helper';
+import { UpdateStateProductionOrderHelper } from './helpers/production-order-helpers/update-state-production-order/update-state-production-order.helper';
+import { UpdatePiceProductionOrderHelper } from './helpers/production-order-helpers/update-price-production-order/update-price-production-order.helper';
+import { GetItemHelper } from './helpers/item-helpers/get-Item/get-Item.helper';
+import { RegisterNewItemHelper } from './helpers/item-helpers/register-new-Item/register-new-Item.helper';
+import { UpdateDescriptionNewItemHelper } from './helpers/item-helpers/update-description-new-Item/update-description-new-Item.helper';
+import { UpdateNameNewItemHelper } from './helpers/item-helpers/update-name-new-Item/update-name-new-Item.helper';
+import { UpdatePriceNewItemHelper } from './helpers/item-helpers/update-price-new-Item/update-price-new-Item.helper';
 
 export class ProductionOrderAgregate implements IproductionOrderDomainService, IItemDomainService {
 
-    private readonly productionOrderService: IproductionOrderDomainService;
-    private readonly itemService: IItemDomainService;
-    private readonly updatePriceNewItemEventPublisher: UpdatePriceNewItemEventPublisher <IItemDomainEntity>;
+    private readonly productionOrderService?: IproductionOrderDomainService;
+    private readonly itemService?: IItemDomainService;
+    private readonly updatePriceNewItemEventPublisher: UpdatePriceNewItemEventPublisher<IItemDomainEntity>;
     private readonly updateDescriptionNewItemEventPublisher: UpdateDescriptionNewItemEventPublisher<IItemDomainEntity>;
     private readonly updatePriceProductionOrderEventPublisher: UpdatePriceProductionOrderEventPublisher<ProductionOrderDomainEntity>;
     private readonly updateCancelProductionOrderEventPublisher: UpdateCancelProduccionOrderEventPublisher<ProductionOrderDomainEntity>;
@@ -32,7 +43,7 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
     private readonly updateStateProductionOrderEventPublisher: UpdatedStateOrderProductionEventPublisher<ProductionOrderDomainEntity>;
 
     constructor(
-        {   productionOrderService,
+        { productionOrderService,
             itemService,
             updateDescriptionNewItemEventPublisher,
             updateCancelProductionOrderEventPublisher,
@@ -43,7 +54,7 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
             updatePriceProductionOrderEventPublisher,
             updatePriceNewItemEventPublisher,
             updateNameNewItemEventPublisher,
-            updateNameProduccionOrderEventPublisher,
+
             updateStateProductionOrderEventPublisher,
         }:
             {
@@ -60,149 +71,63 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
                 updatePriceProductionOrderEventPublisher?: RegisterProductionOrderEventPublisher<ProductionOrderDomainEntity>;
                 updatePriceNewItemEventPublisher?: UpdatePriceNewItemEventPublisher<IItemDomainEntity>;
                 updateNameNewItemEventPublisher?: UpdateNameNewItemEventPublisher<IItemDomainEntity>;
-                
 
-            }) {}
+
+            }) {
+        this.productionOrderService = productionOrderService;
+        this.itemService = itemService;
+        this.updateDescriptionNewItemEventPublisher = updateDescriptionNewItemEventPublisher ?? this.updateDescriptionNewItemEventPublisher;
+        this.updateCancelProductionOrderEventPublisher = updateCancelProductionOrderEventPublisher ?? this.updateCancelProductionOrderEventPublisher;
+        this.gotProductionOrderEventPublisher = gotProductionOrderEventPublisher ?? this.gotProductionOrderEventPublisher;
+        this.gotItemEventPublisher = gotItemEventPublisher ?? this.gotItemEventPublisher;
+        this.registerNewItemEventPublisher = registerNewItemEventPublisher ?? this.registerNewItemEventPublisher;
+        this.registerProductionOrderEventPublisher = registerProductionOrderEventPublisher ?? this.registerProductionOrderEventPublisher;
+        this.updatePriceProductionOrderEventPublisher = updatePriceProductionOrderEventPublisher ?? this.updatePriceProductionOrderEventPublisher;
+        this.updatePriceNewItemEventPublisher = updatePriceNewItemEventPublisher ?? this.updatePriceNewItemEventPublisher;
+        this.updateNameNewItemEventPublisher = updateNameNewItemEventPublisher ?? this.updateNameNewItemEventPublisher;
+        this.updateStateProductionOrderEventPublisher = updateStateProductionOrderEventPublisher ?? this.updateStateProductionOrderEventPublisher;
+    }
+    updateNameProductionOrder(ProductionOrderId: string, name: string): Promise<ProductionOrderDomainEntity> {
+        return UpdateNameProductionOrderHelper( ProductionOrderId, name, this.updateCancelProductionOrderEventPublisher, this.productionOrderService);
+    }
     async updatePriceNewItem(itemId: string, price: number): Promise<IItemDomainEntity> {
-        if (!this.updatePriceNewItemEventPublisher) {
-            throw new AggregateRootException('updatePriceNewItemEventPublisher is not defined');
-        }
-        if (!this.itemService) {
-            throw new AggregateRootException('itemService is not defined');
-        }
-        const respuesta = await this.itemService.updatePriceNewItem(itemId, price);
-        this.updatePriceNewItemEventPublisher.response = respuesta;
-        this.updatePriceNewItemEventPublisher.publish();
-        return respuesta;
+        return UpdatePriceNewItemHelper(itemId, price, this.updatePriceNewItemEventPublisher, this.itemService);
     }
     async updateDescriptionNewItem(itemId: string, description: string): Promise<IItemDomainEntity> {
-        if (!this.updateDescriptionNewItemEventPublisher) {
-            throw new AggregateRootException('updateDescriptionNewItemEventPublisher is not defined');
-        }
-        if (!this.itemService) {
-            throw new AggregateRootException('itemService is not defined');
-        }
-        const respuesta = await this.itemService.updateDescriptionNewItem(itemId, description);
-        this.updateDescriptionNewItemEventPublisher.response = respuesta;
-        this.updateDescriptionNewItemEventPublisher.publish();
-        return respuesta;
+        return UpdateDescriptionNewItemHelper(itemId, description, this.updateDescriptionNewItemEventPublisher, this.itemService);
     }
-    async updateNameNewItem(itemId: string, name:string): Promise<IItemDomainEntity> {
-        if (!this.updateNameNewItemEventPublisher) {
-            throw new AggregateRootException('updateNameNewItemEventPublisher is not defined');
-        }
-        if (!this.itemService) {
-            throw new AggregateRootException('itemService is not defined');
-        }
-        const respuesta = await this.itemService.updateNameNewItem(itemId, name);
-        this.updateNameNewItemEventPublisher.response = respuesta;
-        this.updateNameNewItemEventPublisher.publish();
-        return respuesta;
+    async updateNameNewItem(itemId: string, name: string): Promise<IItemDomainEntity> {
+        return UpdateNameNewItemHelper(itemId, name, this.updateNameNewItemEventPublisher, this.itemService);
 
     }
     async updatestateProduccionOrder(ProductionOrderId: string, state: boolean): Promise<ProductionOrderDomainEntity> {
-        if (!this.updateStateProductionOrderEventPublisher) {
-            throw new AggregateRootException('updateStateProductionOrderEventPublisher is not defined');
-        }
-        if (!this.productionOrderService) {
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.updatestateProduccionOrder(ProductionOrderId, state);
-        this.updateStateProductionOrderEventPublisher.response = respuesta;
-        this.updateStateProductionOrderEventPublisher.publish();
-        return respuesta;
-
-    }
-    async updateProductionOrderName(ProductionOrderId: string, name: string): Promise<ProductionOrderDomainEntity> {
-        if (!this.updatedetailProductionOrderEventPublisher) {
-            throw new AggregateRootException('updatedetailProductionOrderEventPublisher is not defined');
-        }
-        if (!this.productionOrderService) {
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.updateProductionOrderName(ProductionOrderId, name);
-        this.updatedetailProductionOrderEventPublisher.response = respuesta;
-        this.updatedetailProductionOrderEventPublisher.publish();
-        return respuesta;
+        return UpdateStateProductionOrderHelper(ProductionOrderId, state, this.updateStateProductionOrderEventPublisher, this.productionOrderService);
     }
 
-    async registerNewItem(itemId: string, name:string, description:string, price: number): Promise<IItemDomainEntity> {
-        if (!this.registerNewItemEventPublisher) {
-            throw new AggregateRootException('registerNewItemEventPublisher is not defined');
-        }
-        if (!this.itemService) {
-            throw new AggregateRootException('itemService is not defined');
-        }
-        const respuesta = await this.itemService.registerNewItem(itemId, name, description, price);
-        this.registerNewItemEventPublisher.response = respuesta;
-        this.registerNewItemEventPublisher.publish();
-        return respuesta;
-        
+    async registerNewItem(itemId: string, name: string, description: string, price: number): Promise<IItemDomainEntity> {
+        return RegisterNewItemHelper(itemId, name, description, price, this.registerNewItemEventPublisher, this.itemService);
+
     }
-    async registerProductionOrder(ProductionOrderId: string , date: Date, name: string, price: number, referencenumber: number, state: boolean, cancel: boolean): Promise<ProductionOrderDomainEntity> {
-        if (!this.registerProductionOrderEventPublisher) {
-            throw new AggregateRootException('registerProductionOrderEventPublisher is not defined');
-        }
-        if(!this.productionOrderService){
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.registerProductionOrder(ProductionOrderId, date, name, price, referencenumber, state, cancel);
-        this.registerProductionOrderEventPublisher.response = respuesta;
-        this.registerProductionOrderEventPublisher.publish();
-        return respuesta;
+    async registerProductionOrder(ProductionOrderId: string, date: Date, name: string, price: number, referencenumber: number, state: boolean, cancel: boolean): Promise<ProductionOrderDomainEntity> {
+       return RegisterProductionOrderHelper(ProductionOrderId, date, name, price, referencenumber, state, cancel, this.registerProductionOrderEventPublisher, this.productionOrderService,);
     }
-    
+
     async getItem(itemId: string): Promise<IItemDomainEntity> {
-       if (!this.gotItemEventPublisher) {
-            throw new AggregateRootException('gotItemEventPublisher is not defined');
-        }
-        if (!this.itemService) {
-            throw new AggregateRootException('itemService is not defined');
-        }
-        const respuesta = await this.itemService.getItem(itemId);
-        this.gotItemEventPublisher.response = respuesta;
-        this.gotItemEventPublisher.publish();
-        return respuesta;
+        return GetItemHelper(itemId, this.gotItemEventPublisher, this.itemService);
     }
     async getProductionOrder(ProductionOrderId: string): Promise<ProductionOrderDomainEntity> {
-        if (!this.gotProductionOrderEventPublisher) {
-            throw new AggregateRootException('gotProductionOrderEventPublisher is not defined');
-        }
-        if (!this.productionOrderService) {
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.getProductionOrder(ProductionOrderId);
-        this.gotProductionOrderEventPublisher.response = respuesta;
-        this.gotProductionOrderEventPublisher.publish();
-        return respuesta;
-
+        return GetProductionOrderHelper(ProductionOrderId, this.gotProductionOrderEventPublisher, this.productionOrderService);
     }
-    
+
 
     async updatePriceProductionOrder(ProductionOrderId: string, price: number): Promise<ProductionOrderDomainEntity> {
-        if (!this.updatePriceProductionOrderEventPublisher) {
-            throw new AggregateRootException('updatePriceProductionOrderEventPublisher is not defined');
-        }
-        if (!this.productionOrderService) {
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.updatePriceProductionOrder(ProductionOrderId, price);
-        this.updatePriceProductionOrderEventPublisher.response = respuesta;
-        this.updatePriceProductionOrderEventPublisher.publish();
-        return respuesta;
+        return UpdatePiceProductionOrderHelper(ProductionOrderId, price, this.updatePriceProductionOrderEventPublisher, this.productionOrderService);
     }
-    async updatecancelProduccionOrder(ProductionOrderId: string, cancel?: boolean): Promise<ProductionOrderDomainEntity> {
-        if (!this.updateCancelProductionOrderEventPublisher) {
-            throw new AggregateRootException('updateCancelProductionOrderEventPublisher is not defined');
-        }
-        if (!this.productionOrderService) {
-            throw new AggregateRootException('productionOrderService is not defined');
-        }
-        const respuesta = await this.productionOrderService.updatecancelProduccionOrder(ProductionOrderId, cancel);
-        this.updateCancelProductionOrderEventPublisher.response = respuesta;
-        this.updateCancelProductionOrderEventPublisher.publish();
-        return respuesta;
+    async updatecancelProduccionOrder(ProductionOrderId: string, cancel: boolean): Promise<ProductionOrderDomainEntity> {
+        return UpdateCancelProductionOrderHelper(ProductionOrderId, cancel, this.updateCancelProductionOrderEventPublisher, this.productionOrderService);
 
     }
 
 }
+
+
