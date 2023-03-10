@@ -19,12 +19,7 @@ export /**
  * @return {Promise<ProductionOrderDomainEntity>} promesa de orden de produccion registrada
  */
 const RegisterProductionOrderHelper = async (
-    ProductionOrderId: string, 
-    date: Date, name: string, 
-    price: number, 
-    referencenumber: number, 
-    state: boolean, 
-    cancel: boolean,
+    ProductionOrderDomainEntity: ProductionOrderDomainEntity,
     registerProduction : RegisterProductionOrderEventPublisher<ProductionOrderDomainEntity>,
     productionService : IproductionOrderDomainService | undefined,
  ): Promise<ProductionOrderDomainEntity> => {
@@ -34,7 +29,7 @@ const RegisterProductionOrderHelper = async (
     if (!productionService) {
         throw new AggregateRootException('registerOrderService is not defined');
     }
-    registerProduction.response = await productionService.registerProductionOrder(ProductionOrderId, date, name, price, referencenumber, state, cancel);
+    registerProduction.response = await productionService.registerProductionOrder(ProductionOrderDomainEntity);
     registerProduction.publish();
     return registerProduction.response;
  }   

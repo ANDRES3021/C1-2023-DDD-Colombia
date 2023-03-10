@@ -1,14 +1,15 @@
 import { IErrorValueObject, ValueObjectBase } from 'src/shared/sofka';
 import { IsEmpty } from 'src/shared/validations/is-empty.validations';
 import { isGreaterZero } from '../../../../../../../../shared/validations/is-greater-zero.validation';
+
 /**
- * La clase PriceValueObject representa un objeto de valor de precio que debe ser mayor que cero y no puede estar vacío.
+ * La clase PriceProductionOrderValueObject representa un objeto de valor de precio que debe ser mayor que cero y no puede estar vacío.
  *
  * @export
- * @class PriceValueObject
+ * @class PriceProductionOrderValueObject
  * @extends {ValueObjectBase<number>} extiende la clase ValueObjectBase con un tipo de valor number
  */
-export class PriceValueObject extends ValueObjectBase<number>{
+export class PriceProductionOrderValueObject extends ValueObjectBase<number>{
     
     constructor(value:number) {
         super(value)

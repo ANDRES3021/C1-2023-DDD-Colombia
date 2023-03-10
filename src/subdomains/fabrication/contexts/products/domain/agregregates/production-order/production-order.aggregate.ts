@@ -1,7 +1,7 @@
+import { ProductionOrderDomainEntity } from './../../entities/production-order.domain-entity';
 import { GetProductionOrderHelper } from './helpers/production-order-helpers/get-produccion-order/get-produccion-order.helper';
 import { AggregateRootException } from './../../../../../../../shared/sofka/exceptions/aggregate-root.exception';
 import { IItemDomainEntity } from "../../entities/interfaces/item.domain-entity.interface";
-import { ProductionOrderDomainEntity } from "../../entities/production-order.domain-entity";
 import { UpdatePriceProductionOrderEventPublisher } from '../../events/publishers/update-price-production-order.event-publisher';
 import { GotProductionOrderEventPublisher } from "../../events/publishers/got-productionorder.event-publisher";
 import { RegisteredNewItemEventPublisher } from "../../events/publishers/registered-new-item.event-publisher";
@@ -148,11 +148,11 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
     /**
      *
      *
-     * @param {string} itemId
-     * @param {string} name
-     * @param {string} description
-     * @param {number} price
-     * @return {*}  {Promise<IItemDomainEntity>}
+     * @param {string} itemId Identificador del ítem a registrar.
+     * @param {string} name Nombre del ítem.
+     * @param {string} description Descripción del ítem.
+     * @param {number} price Precio del ítem.
+     * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem registrado.
      * @memberof ProductionOrderAgregate
      */
     async registerNewItem(itemId: string, name: string, description: string, price: number): Promise<IItemDomainEntity> {
@@ -172,8 +172,8 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
      * @return {Promise<ProductionOrderDomainEntity>} Promesa que resuelve en la entidad de dominio de la orden de producción registrada.
      * @memberof ProductionOrderAgregate
      */
-    async registerProductionOrder(ProductionOrderId: string, date: Date, name: string, price: number, referencenumber: number, state: boolean, cancel: boolean): Promise<ProductionOrderDomainEntity> {
-       return RegisterProductionOrderHelper(ProductionOrderId, date, name, price, referencenumber, state, cancel, this.registerProductionOrderEventPublisher, this.productionOrderService,);
+    async registerProductionOrder(entity :ProductionOrderDomainEntity): Promise<ProductionOrderDomainEntity> {
+       return RegisterProductionOrderHelper(entity, this.registerProductionOrderEventPublisher, this.productionOrderService,);
     }
 
     /**
