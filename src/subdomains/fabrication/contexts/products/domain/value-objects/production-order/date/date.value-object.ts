@@ -1,6 +1,6 @@
-import { IsDategreatertoday } from './../../../../../../../../shared/validations/is-date.validation';
-import { IErrorValueObject, ValueObjectBase } from 'src/shared/sofka';
-import { IsEmpty } from 'src/shared/validations/is-empty.validations';
+import { IsDategreatertoday } from '../../../../../../../../shared/validations/is-date/is-date.validations';
+import { IErrorValueObject, ValueObjectBase } from '@sofka';
+import { IsEmpty } from '@validations';
 /**
  * Esta es una clase que representa un objeto de valor de fecha
  *
@@ -9,8 +9,8 @@ import { IsEmpty } from 'src/shared/validations/is-empty.validations';
  * @extends {ValueObjectBase<Date>} extiende la clase ValueObjectBase con un tipo de valor Date
  */
 export class DateValueObject extends ValueObjectBase<Date>{
-    constructor(value:Date) {
-        super(value)
+    constructor(value?:Date) {
+        super(value ? value : new Date())
     }
     validateData(): void {
         this.IsCurrentDate();

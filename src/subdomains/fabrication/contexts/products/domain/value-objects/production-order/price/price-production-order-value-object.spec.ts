@@ -1,9 +1,10 @@
-import { PriceValueObject } from './price.value-object';
+import { PriceProductionOrderValueObject } from './price-production-order-value-object';
+
 describe('price value object', () => {
-    let objectValue: PriceValueObject;
+    let objectValue: PriceProductionOrderValueObject;
     beforeEach(() => {
       //Arrange and Act
-      objectValue = new PriceValueObject(1000);
+      objectValue = new PriceProductionOrderValueObject(1000);
     });
     it('puede ser creado', () => {
       //Assert
@@ -16,7 +17,7 @@ describe('price value object', () => {
         const price = 1000;
         const expected = true;
         //Act
-        const objectValue = new PriceValueObject(price);
+        const objectValue = new PriceProductionOrderValueObject(price);
         const result = objectValue.hasErrors();
         //Assert
         expect(result).toBe(expected);
@@ -26,7 +27,7 @@ describe('price value object', () => {
         const price = -1000;
         const expected = false;
         //Act
-        const objectValue = new PriceValueObject(price);
+        const objectValue = new PriceProductionOrderValueObject(price);
         const result = objectValue.hasErrors();
         //Assert
         expect(result).toBe(expected);
