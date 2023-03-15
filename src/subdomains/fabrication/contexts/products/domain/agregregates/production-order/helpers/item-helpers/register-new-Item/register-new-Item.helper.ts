@@ -1,5 +1,5 @@
+import { ItemDomainEntity } from './../../../../../entities/item.domain-entity';
 import { AggregateRootException } from "src/shared/sofka";
-import { ItemDomainEntity } from "../../../../../entities/item.domain-entity";
 import { RegisteredNewItemEventPublisher } from "../../../../../events/publishers/registered-new-item.event-publisher";
 import { IItemDomainService } from "../../../../../services/item.domain-service";
 
@@ -15,10 +15,7 @@ export /**
  * @return {Promise<ItemDomainEntity>} promesa de item registrado
  */
 const RegisterNewItemHelper = async (
-    itemId: string, 
-    name: string, 
-    description: string, 
-    price: number,
+    itemDomainEntity: ItemDomainEntity,
     registernewitem: RegisteredNewItemEventPublisher<ItemDomainEntity>,
     registerNewItemService: IItemDomainService | undefined,
 ): Promise<ItemDomainEntity> => {
@@ -29,10 +26,8 @@ const RegisterNewItemHelper = async (
         throw new AggregateRootException('productionOrderService is not defined');
     }
     registernewitem.response = await registerNewItemService.registerNewItem(
-        itemId, 
-        name, 
-        description, 
-        price);
+        itemDomainEntity
+        );
     registernewitem.publish();
     return registernewitem.response;
 }

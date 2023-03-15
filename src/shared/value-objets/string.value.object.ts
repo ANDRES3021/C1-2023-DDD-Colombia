@@ -1,8 +1,8 @@
-import { StringMaxLength } from '../validations/is-max-string.validate';
-import { IErrorValueObject } from '../sofka/interface/error-object-value.interface';
-import { IsEmpty } from '../validations/is-empty.validations';
-import { ValueObjectBase } from "../sofka/bases";
-import { StringMinLength } from 'src/shared/validations/is-min-string.validate';
+import { IErrorValueObject } from '@sofka';
+import { IsEmpty } from '@validations';
+import { ValueObjectBase } from "@sofka";
+import { IsStringMinLength } from '@validations';
+import { IsStringMaxLength } from '@validations';
 
 
 /**
@@ -32,14 +32,14 @@ export abstract class StringValueObjectBase extends ValueObjectBase<string>{
         }
     }
     private IsStringMax(): void {
-        if (StringMaxLength(this.value, 100)) {
+        if (IsStringMaxLength(this.value, 100)) {
 
             this.setError({field: 'name', message:'el tamaño maximo es 100'} as IErrorValueObject)
         }
 
     }
     private IsStringMin(): void {
-        if (StringMinLength(this.value, 5)) {
+        if (IsStringMinLength(this.value, 5)) {
 
             this.setError({field: 'name', message:'el tamaño minimo es 5'} as IErrorValueObject)
         }

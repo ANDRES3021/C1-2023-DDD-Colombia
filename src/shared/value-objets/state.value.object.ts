@@ -1,7 +1,8 @@
-import { isBoolean } from '../validations/is-boolean.validate';
-import { ValueObjectBase } from "../sofka/bases";
-import { IErrorValueObject } from '../sofka/interface';
-import { IsEmpty } from 'src/shared/validations/is-empty.validations';
+import { IsEmpty } from '@validations';
+
+import { ValueObjectBase } from "@sofka";
+import { IErrorValueObject } from '@sofka';
+import { IsBoolean } from '@validations';
 
 
 /**
@@ -23,7 +24,7 @@ export abstract class StateValueObjectBase extends ValueObjectBase<boolean> {
         this.IsEmpty()
     }
     private IsBoolean(): void {
-        if(isBoolean(this.value)) {
+        if(IsBoolean(this.value)) {
             this.setError({field: 'name', message:'debe ser un booleano'} as IErrorValueObject)
         }
     }

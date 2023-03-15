@@ -1,7 +1,6 @@
-import { IErrorValueObject } from '../sofka/interface/error-object-value.interface';
-import { IsUUID4 } from "src/shared/validations/is-uuid-4.validation";
-import { ValueObjectBase } from "../sofka/bases";
-import { IsEmpty } from 'src/shared/validations/is-empty.validations';
+import { IsEmpty } from '@validations';
+import { IErrorValueObject, ValueObjectBase } from '@sofka';
+import { IsUUID4 } from '@validations';
 
 /**
  *  Clase abstracta para  validar valores que deben ser cadenas de texto que representan un UUID válido.

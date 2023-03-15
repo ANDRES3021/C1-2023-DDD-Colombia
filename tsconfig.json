@@ -16,6 +16,14 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@validations": ["./src/shared/validations"],
+      "@ValueObjectBase": ["./src/shared/domain/value-object"],
+      "@context/fabrication/domain": ["./src/subdomains/commodity/contexts/fabrication/domain"],
+"@context/fabrication/applications": ["./src/subdomains/commodity/contexts/fabrication/application"],
+      "@context/fabrication/infrastructure": ["./src/subdomains/commodity/contexts/fabrication/infrastructure"],
+      "@sofka": ["./src/shared/sofka"],
+    },
   }
 }

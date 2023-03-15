@@ -1,3 +1,4 @@
+import { ItemDomainEntity } from './../../entities/item.domain-entity';
 import { ProductionOrderDomainEntity } from './../../entities/production-order.domain-entity';
 import { GetProductionOrderHelper } from './helpers/production-order-helpers/get-produccion-order/get-produccion-order.helper';
 import { AggregateRootException } from './../../../../../../../shared/sofka/exceptions/aggregate-root.exception';
@@ -155,8 +156,8 @@ export class ProductionOrderAgregate implements IproductionOrderDomainService, I
      * @return {Promise<IItemDomainEntity>} Promesa que resuelve en la entidad de dominio del ítem registrado.
      * @memberof ProductionOrderAgregate
      */
-    async registerNewItem(itemId: string, name: string, description: string, price: number): Promise<IItemDomainEntity> {
-        return RegisterNewItemHelper(itemId, name, description, price, this.registerNewItemEventPublisher, this.itemService);
+    async registerNewItem(entity :ItemDomainEntity): Promise<IItemDomainEntity> {
+        return RegisterNewItemHelper(entity, this.registerNewItemEventPublisher, this.itemService);
 
     }
     /**
