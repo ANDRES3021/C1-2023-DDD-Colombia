@@ -5,7 +5,7 @@
  * @param {number} max Longitud máxima
  * @return  {boolean} true si excede la longitud máxima, false si no lo hace
  */
- export const StringMaxLength = (value: string, max: number): boolean => {
+ export const IsStringMaxLength = (value: string, max: number): boolean => {
     return value.length > max ? true : false;
   };
   
