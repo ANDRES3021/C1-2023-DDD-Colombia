@@ -1,16 +1,16 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProductionOrderEntity } from '../entities/production-order.entity';
+import { ProductionOrderPostgresEntity } from '../entities/production-order.entity';
 import { IBase } from './Interfaces/base-interface';
-export class ProductionOrderRepository implements IBase<ProductionOrderEntity> {
+export class ProductionOrderRepository implements IBase<ProductionOrderPostgresEntity> {
     constructor(
-        @InjectRepository(ProductionOrderEntity)
-        private readonly productionOrderRepository: Repository<ProductionOrderEntity>,
+        @InjectRepository(ProductionOrderPostgresEntity)
+        private readonly productionOrderRepository: Repository<ProductionOrderPostgresEntity>,
     ) {}
-    create(entity: ProductionOrderEntity): Promise<ProductionOrderEntity> {
+    create(entity: ProductionOrderPostgresEntity): Promise<ProductionOrderPostgresEntity> {
         return this.productionOrderRepository.save(entity);
     }
-    async update(id: string, entity: ProductionOrderEntity): Promise<ProductionOrderEntity> {
+    async update(id: string, entity: ProductionOrderPostgresEntity): Promise<ProductionOrderPostgresEntity> {
         const data = await this.productionOrderRepository.findOneBy({productionId: id});
         if (data) {
             const newEntity = {
@@ -31,14 +31,14 @@ export class ProductionOrderRepository implements IBase<ProductionOrderEntity> {
         }
         throw new Error('Entity not found');
     }
-   async findOneByUsuarioId(id: string): Promise<ProductionOrderEntity> {
+   async findOneByUsuarioId(id: string): Promise<ProductionOrderPostgresEntity> {
         const data = await this.productionOrderRepository.findOneBy({ productionId: id });
         if (data) {
             return data;
         }   
         throw new Error('Entity not found');
     }
-    findAll(): Promise<ProductionOrderEntity[]> {
+    findAll(): Promise<ProductionOrderPostgresEntity[]> {
         return this.productionOrderRepository.find();
     }
 }

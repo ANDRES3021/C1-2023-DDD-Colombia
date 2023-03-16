@@ -1,9 +1,11 @@
-import { Column, Entity, Index } from "typeorm";
+import { ProductionOrderDomainEntity } from './../../../../../domain/entities/production-order.domain-entity';
+import { Column, Entity, Index, JoinTable, ManyToMany } from "typeorm";
+import { ItemPostgresEntity } from "./item.entity";
 
 @Index('production_order_pkey', ['productionId'], { unique: true })
 
 @Entity('production_order')
-export class ProductionOrderEntity {
+export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
   @Column('uuid', { 
     primary: true, 
     name:'product_order_id', 
@@ -20,11 +22,14 @@ export class ProductionOrderEntity {
     price?: number;
 
   @Column({ type: 'integer' })  
-  ReferenceNumber?: number;
+  referenceNumber?: number;
 
   @Column({ type: 'boolean', default: () => 'true'})
   state?: boolean;
 
   @Column({ type: 'boolean', default: () => 'false'})
   cancel?: boolean;
+  @ManyToMany(() => ItemPostgresEntity, item => item.productionOrder)
+  @JoinTable()
+  items: ItemPostgresEntity[];
 }

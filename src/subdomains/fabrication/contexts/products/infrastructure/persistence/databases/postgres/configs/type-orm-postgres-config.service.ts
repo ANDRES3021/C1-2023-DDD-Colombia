@@ -2,7 +2,7 @@ import { ItemPostgresEntity } from './../entities/item.entity';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from "@nestjs/common";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
-import { ProductionOrderEntity } from '../entities/production-order.entity';
+import { ProductionOrderPostgresEntity } from '../entities/production-order.entity';
 
 @Injectable()
 export class TypeOrmPostgresConfigService implements TypeOrmOptionsFactory {
@@ -16,7 +16,7 @@ export class TypeOrmPostgresConfigService implements TypeOrmOptionsFactory {
         username: this.configService.get<string>('DB_USER'),
         password: this.configService.get<string>('DB_PASSWORD') ,
         database: this.configService.get<string>('DB_NAME'),
-        entities: [ProductionOrderEntity, ItemPostgresEntity],
+        entities: [ProductionOrderPostgresEntity, ItemPostgresEntity],
         synchronize: true,
     };
     }

@@ -2,6 +2,7 @@ import { ItemDomainEntity } from './subdomains/fabrication/contexts/products/dom
 import { ItemPostgresService } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/services/item.service';
 import { ConfigService } from "@nestjs/config";
 import { Controller, Post } from '@nestjs/common';
+import { ItemPostgresEntity } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/entities/item.entity';
 
 @Controller('item')
 
@@ -14,7 +15,7 @@ export class ItemController {
     @Post('crear-item')
     createProductionOrder(){
         const item =
-        new ItemDomainEntity(
+        new ItemPostgresEntity(
             {itemId: '9f5f761a-3202-4ca4-b53a-2d6cde94e88e'
             ,name: 'Item 1',
             description: 'Item 1 description',

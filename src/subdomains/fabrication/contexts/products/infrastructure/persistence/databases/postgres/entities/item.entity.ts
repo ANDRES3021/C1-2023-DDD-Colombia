@@ -1,9 +1,11 @@
-import { Column, Entity, Index } from "typeorm";
+import { ItemDomainEntity } from './../../../../../domain/entities/item.domain-entity';
+import { Column, Entity, Index, ManyToMany } from "typeorm";
+import { ProductionOrderPostgresEntity } from "./production-order.entity";
 
 @Index('item_pkey', ['ItemId'], { unique: true })
 
 @Entity('item')
-export class ItemPostgresEntity {
+export class ItemPostgresEntity extends ItemDomainEntity{
     @Column('uuid', { 
         primary: true, 
         name:'item_id', 
@@ -16,4 +18,8 @@ export class ItemPostgresEntity {
     description?: string;
     @Column({ type: 'integer' })
     price?: number;
+
+    @ManyToMany(() => ProductionOrderPostgresEntity, productionOrder => productionOrder.items)
+
+    productionOrder: ProductionOrderPostgresEntity[];
 }

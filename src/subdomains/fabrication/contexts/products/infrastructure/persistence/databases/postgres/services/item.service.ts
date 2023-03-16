@@ -8,16 +8,8 @@ import { IItemDomainService } from "src/subdomains/fabrication/contexts/products
 @Injectable()
 export class ItemPostgresService implements IItemDomainService{
     constructor(private readonly itemPostgresRepository: ItemPostgresRepository) {}
-    registerNewItem(entity : ItemDomainEntity): Promise<IItemDomainEntity> {
-        const data = new ItemPostgresEntity(
-
-        );
-        data.ItemId = entity.itemId?.valueOf()?? '';
-        data.name = entity.name?.valueOf()?? '';
-        data.description = entity.description?.valueOf()?? '';
-        data.price = entity.price?.valueOf()?? 0;
-        
-        return this.itemPostgresRepository.create(data);
+    registerNewItem(entity : ItemPostgresEntity): Promise<ItemPostgresEntity> {
+        return this.itemPostgresRepository.create(entity);
     }
     updateNameNewItem(itemId: string, name: string): Promise<IItemDomainEntity> {
         return this.updateNameNewItem(itemId, name);
