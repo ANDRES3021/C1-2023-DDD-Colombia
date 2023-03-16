@@ -1,8 +1,8 @@
 import { ItemDomainEntity } from './subdomains/fabrication/contexts/products/domain/entities/item.domain-entity';
-import { ItemPostgresService } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/services/item.service';
+import { ItemPostgresService } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/services/item-postgres.service';
 import { ConfigService } from "@nestjs/config";
 import { Controller, Post } from '@nestjs/common';
-import { ItemPostgresEntity } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/entities/item.entity';
+import { ItemPostgresEntity } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/entities/item-postgres.entity';
 
 @Controller('item')
 

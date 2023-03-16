@@ -1,17 +1,17 @@
-import { ProductionOrderDomainEntity } from './../../../../../domain/entities/production-order.domain-entity';
+import { ProductionOrderDomainEntity } from '../../../../../domain/entities/production-order.domain-entity';
 import { Column, Entity, Index, JoinTable, ManyToMany } from "typeorm";
-import { ItemPostgresEntity } from "./item.entity";
+import { ItemPostgresEntity } from "./item-postgres.entity";
 
 @Index('production_order_pkey', ['productionId'], { unique: true })
-
-@Entity('production_order')
+@Entity('production_order', { schema: 'public' })
 export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
   @Column('uuid', { 
     primary: true, 
     name:'product_order_id', 
     default: () => 'uuid_generate_v4()'
-    })
+  })
   productionId: string;
+
   @Column({ type: 'date', default: () => 'CURRENT_DATE' })  
   date?: Date;
 
@@ -19,7 +19,7 @@ export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
   name?: string;
 
   @Column({ type: 'integer' })
-    price?: number;
+  price?: number;
 
   @Column({ type: 'integer' })  
   referenceNumber?: number;
@@ -29,7 +29,12 @@ export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
 
   @Column({ type: 'boolean', default: () => 'false'})
   cancel?: boolean;
-  @ManyToMany(() => ItemPostgresEntity, item => item.productionOrder)
+
+  @ManyToMany(
+    () => ItemPostgresEntity,
+    (item) => item.productionOrders,
+    { cascade: ['insert'] }
+  )
   @JoinTable()
   items: ItemPostgresEntity[];
 }

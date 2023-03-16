@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ItemPostgresRepository } from './../repositories/item.repository';
-import { ItemPostgresEntity } from './../entities/item.entity';
-import { ItemDomainEntity } from './../../../../../domain/entities/item.domain-entity';
+import { ItemPostgresRepository } from '../repositories/item.repository';
+import { ItemPostgresEntity } from '../entities/item-postgres.entity';
+import { ItemDomainEntity } from '../../../../../domain/entities/item.domain-entity';
 import { IItemDomainEntity } from "src/subdomains/fabrication/contexts/products/domain/entities/interfaces/item.domain-entity.interface";
 import { IItemDomainService } from "src/subdomains/fabrication/contexts/products/domain/services/item.domain-service";
 

@@ -1,6 +1,6 @@
-import { ProductionOrderPostgresEntity } from './../entities/production-order.entity';
+import { ProductionOrderPostgresEntity } from '../entities/production-order-postgres.entity';
 import { Entity } from 'typeorm';
-import { ProductionOrderRepository } from './../repositories/porduction-order.repository';
+import { ProductionOrderRepository } from '../repositories/porduction-order.repository';
 import { Injectable } from "@nestjs/common";
 import { IproductionOrderDomainService } from 'src/subdomains/fabrication/contexts/products/domain/services/production-order.domain-service';
 import { ProductionOrderDomainEntity } from 'src/subdomains/fabrication/contexts/products/domain/entities/production-order.domain-entity';

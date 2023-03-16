@@ -1,7 +1,7 @@
+import { IGetProductionOrderCommand } from './../../../domain/interfaces/commands/get-production-order.command';
 import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/shared/sofka";
 import { ProductionOrderAgregate } from "../../../domain/agregregates/production-order/production-order.aggregate";
 import { GotProductionOrderEventPublisher } from "../../../domain/events/publishers/got-productionorder.event-publisher";
-import { IGetProductionOrderUseCase } from "../../../domain/interfaces/commands/get-production-order.command";
 import { IGetProductionOrderResponse } from "../../../domain/interfaces/responses/get-production-order-response";
 import { IproductionOrderDomainService } from "../../../domain/services/production-order.domain-service";
 import { ProductionOrderIdValueObject } from "../../../domain/value-objects/production-order/prodution-order-id/production-order-id.value-object";
@@ -12,11 +12,11 @@ import { ProductionOrderIdValueObject } from "../../../domain/value-objects/prod
  * @export
  * @class GetProductionOrderUseCase
  * @extends {ValueObjectErrorHandler} extiendo de ValueObjectErrorHandler para poder manejar los errores de los value objects
- * @implements {IUseCase<IGetProductionOrderUseCase, IGetProductionOrderResponse>} implemento la interfaz IUseCase
+ * @implements {IUseCase<IGetProductionOrderCommand, IGetProductionOrderResponse>} implemento la interfaz IUseCase
  */
 export class GetProductionOrderUseCase 
 extends ValueObjectErrorHandler
-implements IUseCase <IGetProductionOrderUseCase, IGetProductionOrderResponse> {
+implements IUseCase <IGetProductionOrderCommand, IGetProductionOrderResponse> {
     productionOrderAgregate: ProductionOrderAgregate;
     /**
      * Creates an instance of GetProductionOrderUseCase.
@@ -38,7 +38,7 @@ implements IUseCase <IGetProductionOrderUseCase, IGetProductionOrderResponse> {
             );
         }
         
-    async execute(command: IGetProductionOrderUseCase): Promise<IGetProductionOrderResponse> {
+    async execute(command: IGetProductionOrderCommand): Promise<IGetProductionOrderResponse> {
         const productionOrderId = new ProductionOrderIdValueObject(command.productionOrderId);
         if (productionOrderId.hasErrors() === true) {
             this.setErrors(productionOrderId.getErrors());

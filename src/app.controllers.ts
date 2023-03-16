@@ -1,8 +1,8 @@
-import { ProductionOrderPostgresEntity } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/entities/production-order.entity';
+import { ProductionOrderPostgresEntity } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/entities/production-order-postgres.entity';
 import { Controller, Get, Post } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ProductionOrderDomainEntity } from './subdomains/fabrication/contexts/products/domain/entities/production-order.domain-entity';
-import { ProductionOrderPostgresService } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/services/production-order.service';
+import { ProductionOrderPostgresService } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/services/production-order-postgres.service';
 
 @Controller('production-order')
 
@@ -21,11 +21,7 @@ export class AppController {
             price: 1000,
             referenceNumber: 123456,
             state : true,
-            cancel : false,
-            
-            
-
-        
+            cancel : false,        
         }
         );
         return this.productionOrderPostgresService.registerProductionOrder(item);

@@ -1,4 +1,4 @@
-export interface IcreateProductionOrderUseCase {
+export interface IcreateProductionOrderCommand {
     productionOrderId: string; 
     date: Date;
     name: string; 

@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { ItemIdValueObject } from './subdomains/fabrication/contexts/products/domain/value-objects/item/item-id/item-id.value-object';
 import { NameItemValueObject } from './subdomains/fabrication/contexts/products/domain/value-objects/item/name/name.value-object';
 import { PostgreSQLModule } from './subdomains/fabrication/contexts/products/infrastructure/persistence/databases/postgres/postgresql.module';
+import { ProductionOrderModule } from './subdomains/fabrication/contexts/products/infrastructure/production-order.module';
 
 
 @Module({
@@ -12,9 +13,9 @@ import { PostgreSQLModule } from './subdomains/fabrication/contexts/products/inf
       isGlobal: true,
       envFilePath: join(process.cwd(), 'environments', `.env.${process.env.SCOPE}`),
     }),
-    PostgreSQLModule
+    ProductionOrderModule
   ],
   controllers: [],
-  providers: [ItemIdValueObject, NameItemValueObject],
+  providers: [],
 })
 export class AppModule {}

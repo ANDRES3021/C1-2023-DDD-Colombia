@@ -14,10 +14,12 @@ export class PriceProductionOrderValueObject extends ValueObjectBase<number>{
     constructor(value:number) {
         super(value)
     }
+
     validateData(): void {
         this.IsPositive()
         // this.IsEmpty()
     }
+
     private IsPositive(): void {
         if (IsGreaterZero(this.value)){
             this.setError({field: 'name', message:'debe ser un numero mas grande que cero'} as IErrorValueObject)

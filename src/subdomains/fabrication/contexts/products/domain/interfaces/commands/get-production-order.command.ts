@@ -1,3 +1,3 @@
-export interface IGetProductionOrderUseCase {
+export interface IGetProductionOrderCommand {
     productionOrderId: string;
 }

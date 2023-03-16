@@ -18,7 +18,7 @@ export class DateValueObject extends ValueObjectBase<Date>{
     }
     private IsCurrentDate(): void {
         if (IsDategreatertoday(this.value)){
-            this.setError({field: 'name', message:'no puedes enviar una fecha menor que el dia de ho'} as IErrorValueObject)
+            this.setError({field: 'name', message:'no puedes enviar una fecha menor que el dia de hoy'} as IErrorValueObject)
         }
     }
     private IsEmpty(): void { 

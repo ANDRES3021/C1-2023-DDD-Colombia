@@ -12,20 +12,21 @@ import { IsGreaterZero } from "@validations"
 export class ReferenceNumberValueObject extends ValueObjectBase<number>{
     
     constructor(value:number) {
+        console.log('value', value)
         super(value)
     }
     validateData(): void {
         this.IsPositive()
-        this.IsEmpty()            
+        // this.IsEmpty()            
     }                  
     private IsPositive(): void {           
         if (IsGreaterZero(this.value)){
-            this.setError({field: 'name', message:'debe ser un numero mas grande que cero'} as IErrorValueObject)
+            this.setError({field: 'name', message:'el numero de referencia debe ser un numero mas grande que cero'} as IErrorValueObject)
         }
     }
-    private IsEmpty(): void { 
-        if (IsEmpty(this.value)) {
-            this.setError({field: 'name', message:'no puedes enviar este campo vacio'} as IErrorValueObject)
-        }
-    }
+    // private IsEmpty(): void { 
+    //     if (IsEmpty(this.value)) {
+    //         this.setError({field: 'name', message:'no puedes enviar este campo vacio'} as IErrorValueObject)
+    //     }
+    // }
 }

@@ -15,7 +15,7 @@ describe('price value object', () => {
       it('si le paso un precio valido no me da error', () => {
         //Arrange
         const price = 1000;
-        const expected = true;
+        const expected = false;
         //Act
         const objectValue = new PriceProductionOrderValueObject(price);
         const result = objectValue.hasErrors();
@@ -25,7 +25,7 @@ describe('price value object', () => {
       it('si le paso un precio no valido me da error', () => {
         //Arrange
         const price = -1000;
-        const expected = false;
+        const expected = true;
         //Act
         const objectValue = new PriceProductionOrderValueObject(price);
         const result = objectValue.hasErrors();

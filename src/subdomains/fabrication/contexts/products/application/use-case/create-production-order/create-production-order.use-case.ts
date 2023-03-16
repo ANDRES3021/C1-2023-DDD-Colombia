@@ -1,3 +1,4 @@
+import { ItemDomainEntity } from './../../../domain/entities/item.domain-entity';
 import { PriceValueObject } from '../../../domain/value-objects/item/price/price.value-object';
 import { DescriptionItemValueObject } from '../../../domain/value-objects/item/description/description.value-object';
 import { ItemIdValueObject } from '../../../domain/value-objects/item/item-id/item-id.value-object';
@@ -7,7 +8,7 @@ import { ProductionOrderIdValueObject } from '../../../domain/value-objects/prod
 import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/shared/sofka";
 import { ProductionOrderAgregate } from '../../../domain/agregregates/production-order/production-order.aggregate';
 import { RegisterProductionOrderEventPublisher } from '../../../domain/events/publishers/registered-production-order.event-publisher';
-import { IcreateProductionOrderUseCase } from '../../../domain/interfaces/commands/create-production-order.command';
+import { IcreateProductionOrderCommand } from '../../../domain/interfaces/commands/create-production-order.command';
 import { IcreateProductionOrderResponse } from '../../../domain/interfaces/responses/created-production-order.response';
 import { IproductionOrderDomainService } from '../../../domain/services/production-order.domain-service';
 import { NameProductionOrderValueObject } from '../../../domain/value-objects/production-order/name/name.value-object';
@@ -24,11 +25,11 @@ import { NameItemValueObject } from '../../../domain/value-objects/item/name/nam
  * @export
  * @class CreateProductionOrderUseCase
  * @extends {ValueObjectErrorHandler} extiende la clase ValueObjectErrorHandler para poder manejar los errores de los value objects
- * @implements {IUseCase<IcreateProductionOrderUseCase, IcreateProductionOrderResponse>} implementa la interfaz IUseCase
+ * @implements {IUseCase<IcreateProductionOrderCommand, IcreateProductionOrderResponse>} implementa la interfaz IUseCase
  */
 export class CreateProductionOrderUseCase 
 extends ValueObjectErrorHandler
-implements IUseCase<IcreateProductionOrderUseCase, IcreateProductionOrderResponse> {
+implements IUseCase<IcreateProductionOrderCommand, IcreateProductionOrderResponse> {
     productionOrderAgregate: ProductionOrderAgregate;
     /**
      * Creates an instance of CreateProductionOrderUseCase.
@@ -49,7 +50,7 @@ implements IUseCase<IcreateProductionOrderUseCase, IcreateProductionOrderRespons
         );
     }
 
-    async execute(command: IcreateProductionOrderUseCase): Promise<IcreateProductionOrderResponse> {
+    async execute(command: IcreateProductionOrderCommand): Promise<IcreateProductionOrderResponse> {
         const productionOrderId = new ProductionOrderIdValueObject(command.productionOrderId);
         const date = new DateValueObject(command.date);
         const name = new NameProductionOrderValueObject(command.name);
@@ -111,19 +112,32 @@ implements IUseCase<IcreateProductionOrderUseCase, IcreateProductionOrderRespons
         if (this.hasErrors()===true) {
             throw new ValueObjectException('Error al crear la orden de produccion', this.getErrors());
         }
-       
+       const intemidmaped = intems.map((item) => {
+              return new ItemDomainEntity({
+                    itemId: item.itemid.valueOf(),
+                    name: item.name.valueOf(),
+                    description: item.description.valueOf(),
+                    price: item.price.valueOf()
+
+              })
+       });
+       const cancelva = cancel.valueOf();
+       const referva = referenceNumber.valueOf();
+        const productionOrder = new ProductionOrderDomainEntity({
+            
+                productionOrderId:productionOrderId.valueOf() ,
+                date: date.valueOf(),
+                name: name.valueOf(),
+                price: price.valueOf(),
+                referenceNumber: referenceNumber.valueOf(),
+                state : state.valueOf(),
+                cancel: cancel.valueOf(),
+                itemids: intemidmaped
+                
+            
+        }); 
         const resp = await this.productionOrderAgregate.registerProductionOrder(
-                {
-                    productionOrderId,
-                    date,
-                    name,
-                    price,
-                    referenceNumber,
-                    state,
-                    cancel,
-                    itemids: intems
-                    
-                }
+            productionOrder
         )
         return {
             succes: true,
