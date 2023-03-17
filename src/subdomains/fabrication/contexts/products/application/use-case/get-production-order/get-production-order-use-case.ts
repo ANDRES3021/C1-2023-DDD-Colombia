@@ -21,7 +21,7 @@ implements IUseCase <IGetProductionOrderCommand, IGetProductionOrderResponse> {
     /**
      * Creates an instance of GetProductionOrderUseCase.
      * @param {IproductionOrderDomainService} productionOrderService 
-     * @param {GotProductionOrderEventPublisher} gotProductionOrderEventPublisher
+     * @param {GotProductionOrderEventPublisher} gotProductionOrderEventPublisher 
      * @memberof GetProductionOrderUseCase
      */
     constructor(
@@ -38,6 +38,13 @@ implements IUseCase <IGetProductionOrderCommand, IGetProductionOrderResponse> {
             );
         }
         
+    /**
+     *
+     * 
+     * @param {IGetProductionOrderCommand} command 
+     * @return  {Promise<IGetProductionOrderResponse>} retorna una promesa de tipo IGetProductionOrderResponse
+     * @memberof GetProductionOrderUseCase el comando se ejecuta y se obtiene una orden de produccion
+     */
     async execute(command: IGetProductionOrderCommand): Promise<IGetProductionOrderResponse> {
         const productionOrderId = new ProductionOrderIdValueObject(command.productionOrderId);
         if (productionOrderId.hasErrors() === true) {

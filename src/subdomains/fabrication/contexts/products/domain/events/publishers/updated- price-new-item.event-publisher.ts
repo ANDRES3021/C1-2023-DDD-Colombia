@@ -8,7 +8,7 @@ import { ItemDomainEntity } from "../../entities/item.domain-entity";
  * @export
  * @abstract
  * @class UpdatePriceNewItemEventPublisher
- * @extends {EventPublisherBase<Response>}
+ * @extends {EventPublisherBase<Response>} extiende la clase "EventPublisherBase"
  * @template Response
  */
 export abstract class UpdatePriceNewItemEventPublisher<Response = ItemDomainEntity> extends EventPublisherBase<Response> {

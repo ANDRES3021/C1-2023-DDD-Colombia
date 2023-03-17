@@ -8,7 +8,7 @@ import { ProductionOrderDomainEntity } from '../../entities/production-order.dom
  * @export
  * @abstract
  * @class UpdateCancelProduccionOrderEventPublisher
- * @extends {EventPublisherBase<Response>}
+ * @extends {EventPublisherBase<Response>} extiende la clase "EventPublisherBase"
  * @template Response
  */
 export abstract class UpdateCancelProduccionOrderEventPublisher<Response = ProductionOrderDomainEntity> extends EventPublisherBase<Response> {

@@ -12,6 +12,12 @@ import { GotProductionOrderEventPublisher } from '../../domain/events/publishers
 import { GetProductionOrderPublisher } from '../messaging/publisher/got-productionorder.publisher';
 
 
+/**
+ *
+ *
+ * @export
+ * @class ProductionOrderController
+ */
 @Controller('production-order')
 export class ProductionOrderController {
     constructor(
@@ -20,6 +26,13 @@ export class ProductionOrderController {
         private readonly getProductionOrderPublisher : GetProductionOrderPublisher,
 
     ) {}
+    /**
+     *
+     *
+     * @param {createProductionOrderCommand} command
+     * @return  {Promise<IcreateProductionOrderResponse>} retorna una promesa de tipo IcreateProductionOrderResponse
+     * @memberof ProductionOrderController
+     */
     @Post()
     async registerProductionOrder(@Body() command : createProductionOrderCommand): Promise<IcreateProductionOrderResponse> {
         const useCase = new CreateProductionOrderUseCase(
@@ -27,6 +40,13 @@ export class ProductionOrderController {
             this.registerProductionOrderPublisher);
         return await useCase.execute(command);
     }
+    /**
+     *
+     *
+     * @param {IGetProductionOrderCommand} command
+     * @return  {Promise<IGetProductionOrderResponse>} retorna una promesa de tipo IGetProductionOrderResponse
+     * @memberof ProductionOrderController
+     */
     @Post('obtener')
     async getProductionOrders(@Body() command : IGetProductionOrderCommand): Promise<IGetProductionOrderResponse> {
         const useCase = new GetProductionOrderUseCase(

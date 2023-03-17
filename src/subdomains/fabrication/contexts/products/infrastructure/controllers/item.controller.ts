@@ -10,6 +10,12 @@ import { GetItemPublisher } from "../messaging/publisher/got-item.publisher";
 import { RegisterItemPublisher } from "../messaging/publisher/registered-new-item.publisher";
 import { ItemService } from "../persistence/services/item.service";
 
+/**
+ *
+ *
+ * @export
+ * @class ItemController el controlador de item
+ */
 @Controller('item')
 export class ItemController {
     constructor(
@@ -17,6 +23,13 @@ export class ItemController {
         private readonly registerNewItemEventPublisher: RegisterItemPublisher,
         private readonly gotItemEventPublisher: GetItemPublisher
     ) { }
+    /**
+     *
+     *
+     * @param {IcreateItemCommand} command
+     * @return   {Promise<IcreateItemResponse>} retorna una promesa de tipo IcreateItemResponse
+     * @memberof ItemController
+     */
     @Post()
     async registerItem(@Body() command: IcreateItemCommand): Promise<IcreateItemResponse> {
         const useCase = new CreateItemUseCase(
@@ -24,6 +37,13 @@ export class ItemController {
             this.registerNewItemEventPublisher);
         return await useCase.execute(command);
     }
+    /**
+     *
+     *
+     * @param {IGetItemCommand} command
+     * @return {Promise<IGetItemResponse>} retorna una promesa de tipo IGetItemResponse
+     * @memberof ItemController
+     */
     @Get('obtener')
     async getItems(@Body() command: IGetItemCommand): Promise<IGetItemResponse> {
         const useCase = new GetItemUseCase(

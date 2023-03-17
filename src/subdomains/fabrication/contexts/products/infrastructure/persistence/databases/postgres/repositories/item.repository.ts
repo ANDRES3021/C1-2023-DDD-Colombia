@@ -3,6 +3,13 @@ import { Repository } from "typeorm";
 import { ItemPostgresEntity } from "../entities/item-postgres.entity";
 import { IBase } from "./Interfaces/base-interface";
 
+/**
+ *
+ *
+ * @export
+ * @class ItemPostgresRepository
+ * @implements {IBase<ItemPostgresEntity>} implementa la interfaz "IBase"
+ */
 export class ItemPostgresRepository implements IBase<ItemPostgresEntity> {
     constructor(
         @InjectRepository(ItemPostgresEntity)

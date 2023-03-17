@@ -5,6 +5,13 @@ import { lastValueFrom } from "rxjs";
 import { GotItemEventPublisher } from "../../../domain/events/publishers/got-item.event-publisher";
 import { ItemEntity } from "../../persistence/entities/item.entity";
 
+/**
+ *
+ *
+ * @export
+ * @class GetItemPublisher 
+ * @extends {GotItemEventPublisher<ItemEntity>} extiende la clase "GotItemEventPublisher"
+ */
 export class GetItemPublisher extends GotItemEventPublisher<ItemEntity> {
     constructor(
         @Inject('REGISTERED_PRODUCTION_ORDER_CONTEXT') private readonly proxy: ClientProxy) {

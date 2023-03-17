@@ -6,6 +6,20 @@ import { lastValueFrom } from 'rxjs';
 import { Inject } from '@nestjs/common';
 import { RegisteredNewItemEventPublisher } from '../../../domain/events/publishers/registered-new-item.event-publisher';
 
+/**
+ *
+ *
+ * @export
+ * @class RegisterItemPublisher
+ * @extends {RegisteredNewItemEventPublisher<ItemEntity>} extiende la clase "RegisteredNewItemEventPublisher"
+ */
+/**
+ *
+ *
+ * @export
+ * @class RegisterItemPublisher
+ * @extends {RegisteredNewItemEventPublisher<ItemEntity>} extiende la clase "RegisteredNewItemEventPublisher"
+ */
 export class RegisterItemPublisher extends RegisteredNewItemEventPublisher<ItemEntity> {
     constructor(
         @Inject('REGISTERED_PRODUCTION_ORDER_CONTEXT') private readonly proxy: ClientProxy) {

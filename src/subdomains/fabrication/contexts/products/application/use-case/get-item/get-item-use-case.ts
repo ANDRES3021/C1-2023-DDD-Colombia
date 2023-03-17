@@ -5,6 +5,14 @@ import { IGetItemCommand } from '../../../domain/interfaces/commands/get-item.co
 import { IGetItemResponse } from '../../../domain/interfaces/responses/get-item.response';
 import { IItemDomainService } from '../../../domain/services/item.domain-service';
 import { ItemIdValueObject } from '../../../domain/value-objects/item/item-id/item-id.value-object';
+/**
+ *
+ *
+ * @export
+ * @class GetItemUseCase
+ * @extends {ValueObjectErrorHandler} extiende la clase ValueObjectErrorHandler
+ * @implements {IUseCase<IGetItemCommand, IGetItemResponse>} implementa la interfaz IUseCase
+ */
 export class GetItemUseCase 
 extends ValueObjectErrorHandler
 implements IUseCase<IGetItemCommand, IGetItemResponse >{
@@ -22,6 +30,13 @@ implements IUseCase<IGetItemCommand, IGetItemResponse >{
             }
         );
     }
+    /**
+     *
+     *
+     * @param {IGetItemCommand} command 
+     * @return  {Promise<IGetItemResponse>} retorna una promesa de tipo IGetItemResponse
+     * @memberof GetItemUseCase el comando se ejecuta y se obtiene un item
+     */
     async execute(command: IGetItemCommand): Promise<IGetItemResponse> {
         const itemid = new ItemIdValueObject(command.itemId);
         if(itemid.hasErrors()=== true) {

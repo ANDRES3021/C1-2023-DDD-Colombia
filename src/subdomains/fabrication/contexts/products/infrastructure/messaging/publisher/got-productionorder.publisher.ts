@@ -6,6 +6,13 @@ import { EventPublisherBase } from "src/shared/sofka/bases/event-publisher.base"
 import { GotProductionOrderEventPublisher } from "../../../domain/events/publishers/got-productionorder.event-publisher"
 import { ProductionOrderEntity } from "../../persistence/entities/production-order.entity"
 
+/**
+ *
+ *
+ * @export
+ * @class GetProductionOrderPublisher
+ * @extends {GotProductionOrderEventPublisher<ProductionOrderEntity>} extiende la clase "GotProductionOrderEventPublisher"
+ */
 export class GetProductionOrderPublisher extends GotProductionOrderEventPublisher<ProductionOrderEntity> {
     constructor(
         @Inject('REGISTERED_PRODUCTION_ORDER_CONTEXT') private readonly proxy: ClientProxy

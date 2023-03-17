@@ -5,6 +5,13 @@ import { RegisterProductionOrderEventPublisher } from "../../../domain/events/pu
 import { lastValueFrom } from 'rxjs';
 import { ProductionOrderEntity } from '../../persistence/entities/production-order.entity';
 
+/**
+ *
+ *
+ * @export
+ * @class RegisterProductionOrderPublisher
+ * @extends {RegisterProductionOrderEventPublisher<ProductionOrderEntity>} extiende la clase "RegisterProductionOrderEventPublisher"
+ */
 @Injectable()
 export class RegisterProductionOrderPublisher extends RegisterProductionOrderEventPublisher<ProductionOrderEntity> {
     constructor(

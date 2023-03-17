@@ -12,6 +12,14 @@ import { NameItemValueObject } from '../../../domain/value-objects/item/name/nam
 import { DescriptionItemValueObject } from '../../../domain/value-objects/item/description/description.value-object';
 import { PriceValueObject } from '../../../domain/value-objects/item/price/price.value-object';
 
+/**
+ *
+ *
+ * @export
+ * @class CreateItemUseCase 
+ * @extends {ValueObjectErrorHandler} extiende la clase ValueObjectErrorHandler
+ * @implements {IUseCase<IcreateItemCommand, IcreateItemResponse>} implementa la interfaz IUseCase
+ */ 
 export class CreateItemUseCase 
 extends ValueObjectErrorHandler
 implements IUseCase<IcreateItemCommand, IcreateItemResponse> {
@@ -28,6 +36,13 @@ implements IUseCase<IcreateItemCommand, IcreateItemResponse> {
             }
         );
     }
+    /**
+     *
+     *
+     * @param {IcreateItemCommand} command
+     * @return  {Promise<IcreateItemResponse>} retorna una promesa de tipo IcreateItemResponse
+     * @memberof CreateItemUseCase el comando se ejecuta y se crea un nuevo item
+     */
     async execute(command: IcreateItemCommand): Promise<IcreateItemResponse> {
         const itemid = new ItemIdValueObject(command.itemid);
         const name = new NameItemValueObject(command.name);
