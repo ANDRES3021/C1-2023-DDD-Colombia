@@ -18,6 +18,6 @@ export class createProductionOrderCommand implements IcreateProductionOrderComma
     state: boolean;
     @IsBoolean({message: "El estado no es valido"})
     cancel: boolean;
-    itemids: { itemid: string; name: string; description: string; price: number; }[];
+    items: { itemid: string; name: string; description: string; price: number; }[];
     
 }

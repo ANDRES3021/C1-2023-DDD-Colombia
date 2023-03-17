@@ -44,14 +44,14 @@ import { MessagingModule } from '../../../messaging/messaging.module';
     ProductionOrderPostgresService,
     ItemPostgresRepository,
     ItemPostgresService,
-    ProductionOrderService
+    
   ],
   exports: [
     ProductionOrderPostgresService,
     ProductionOrderRepository,
     ItemPostgresRepository,
     ItemPostgresService,
-    ProductionOrderService
+    
   ]
 })
 export class PostgreSQLModule { }

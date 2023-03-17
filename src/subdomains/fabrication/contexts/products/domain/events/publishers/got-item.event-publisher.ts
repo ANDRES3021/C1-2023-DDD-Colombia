@@ -1,4 +1,5 @@
 import { EventPublisherBase } from "src/shared/sofka/bases/event-publisher.base";
+import { ItemDomainEntity } from "../../entities/item.domain-entity";
 import { ProductionOrderDomainEntity } from "../../entities/production-order.domain-entity";
 
 /**
@@ -12,7 +13,7 @@ import { ProductionOrderDomainEntity } from "../../entities/production-order.dom
  * @extends {EventPublisherBase<Response>}
  * @template Response
  */
-export abstract class GotItemEventPublisher<Response = ProductionOrderDomainEntity> extends EventPublisherBase<Response> {
+export abstract class GotItemEventPublisher<Response = ItemDomainEntity> extends EventPublisherBase<Response> {
     publish<Result = any>(): Promise<Result> {
         return this.emit('products.got-item', JSON.stringify(this.response));
     }

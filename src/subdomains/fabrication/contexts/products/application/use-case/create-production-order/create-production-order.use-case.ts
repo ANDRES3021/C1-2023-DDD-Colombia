@@ -64,7 +64,7 @@ implements IUseCase<IcreateProductionOrderCommand, IcreateProductionOrderRespons
             description: DescriptionItemValueObject;
             price: PriceValueObject;
         }[] = [];
-        command.itemids.forEach((item) => {
+        command.items.forEach((item) => {
             intems.push({
                 itemid: new ItemIdValueObject(item.itemid),
                 name: new NameItemValueObject(item.name),

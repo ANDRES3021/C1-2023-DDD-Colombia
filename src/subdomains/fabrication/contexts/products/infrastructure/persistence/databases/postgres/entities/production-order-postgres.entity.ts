@@ -1,5 +1,5 @@
 import { ProductionOrderDomainEntity } from '../../../../../domain/entities/production-order.domain-entity';
-import { Column, Entity, Index, JoinTable, ManyToMany } from "typeorm";
+import { Column, Entity, Index, JoinColumn, JoinTable, ManyToMany, OneToOne } from "typeorm";
 import { ItemPostgresEntity } from "./item-postgres.entity";
 
 @Index('production_order_pkey', ['productionId'], { unique: true })
@@ -7,7 +7,7 @@ import { ItemPostgresEntity } from "./item-postgres.entity";
 export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
   @Column('uuid', { 
     primary: true, 
-    name:'product_order_id', 
+    name:'production_id', 
     default: () => 'uuid_generate_v4()'
   })
   productionId: string;
@@ -30,11 +30,21 @@ export class ProductionOrderPostgresEntity extends ProductionOrderDomainEntity {
   @Column({ type: 'boolean', default: () => 'false'})
   cancel?: boolean;
 
-  @ManyToMany(
-    () => ItemPostgresEntity,
-    (item) => item.productionOrders,
-    { cascade: ['insert'] }
-  )
-  @JoinTable()
-  items: ItemPostgresEntity[];
+  
+
+@ManyToMany(() => ItemPostgresEntity, (item) => item.itemId, { cascade: ['insert'] })
+@JoinTable({
+  name: 'production_order_item',
+  joinColumn: {
+    name: 'production_id',
+    referencedColumnName: 'productionId',
+  },
+  inverseJoinColumn: {
+    name: 'item_id',
+    referencedColumnName: 'itemId',
+  },
+})
+items: ItemPostgresEntity[];
 }
+
+

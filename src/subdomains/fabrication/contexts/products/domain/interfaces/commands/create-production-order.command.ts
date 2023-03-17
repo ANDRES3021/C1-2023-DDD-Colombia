@@ -6,7 +6,7 @@ export interface IcreateProductionOrderCommand {
     referencenumber: number; 
     state: boolean; 
     cancel: boolean;
-    itemids:  {
+    items:  {
         itemid: string;
         name: string;
         description: string;

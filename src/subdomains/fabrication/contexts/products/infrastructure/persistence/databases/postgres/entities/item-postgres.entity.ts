@@ -1,5 +1,5 @@
 import { ItemDomainEntity } from '../../../../../domain/entities/item.domain-entity';
-import { Column, Entity, Index, ManyToMany } from "typeorm";
+import { Column, Entity, Index, JoinTable, ManyToMany, OneToOne } from "typeorm";
 import { ProductionOrderPostgresEntity } from "./production-order-postgres.entity";
 
 @Index('item_pkey', ['itemId'], { unique: true })
@@ -21,9 +21,17 @@ export class ItemPostgresEntity extends ItemDomainEntity{
     @Column({ type: 'integer' })
     price?: number;
 
-    @ManyToMany(
-        () => ProductionOrderPostgresEntity,
-        (productionOrder) => productionOrder.items
-    )
-    productionOrders: ProductionOrderPostgresEntity[];
+@ManyToMany(() => ProductionOrderPostgresEntity, (productionOrder) => productionOrder.productionId)
+@JoinTable({
+  name: 'production_order_item',
+  joinColumn: {
+    name: 'item_id',
+    referencedColumnName: 'itemId',
+  },
+  inverseJoinColumn: {
+    name: 'production_id',
+    referencedColumnName: 'productionId',
+  },
+})
+productionOrders: ProductionOrderPostgresEntity[];
 }

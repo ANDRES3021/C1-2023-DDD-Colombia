@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { RegisteredNewItemEventPublisher } from '../../domain/events/publishers/registered-new-item.event-publisher';
+import { GetProductionOrderPublisher } from './publisher/got-productionorder.publisher';
+import { RegisterItemPublisher } from './publisher/registered-new-item.publisher';
 import { RegisterProductionOrderPublisher } from './publisher/registered-production-order.publisher';
 @Module({
     imports: [
@@ -19,7 +22,7 @@ import { RegisterProductionOrderPublisher } from './publisher/registered-product
 
     ],
     controllers: [],
-    providers: [RegisterProductionOrderPublisher],
-    exports: [RegisterProductionOrderPublisher]
+    providers: [RegisterProductionOrderPublisher, GetProductionOrderPublisher, RegisterItemPublisher],
+    exports: [RegisterProductionOrderPublisher, GetProductionOrderPublisher, RegisterItemPublisher]
 })
 export class MessagingModule {}
