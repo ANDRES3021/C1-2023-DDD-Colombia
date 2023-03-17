@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
+import axios from "axios";
 import { CreateItemUseCase } from "../../application/use-case/create-item/create-item.use-case";
 import { GetItemUseCase } from "../../application/use-case/get-item/get-item-use-case";
 import { RegisteredNewItemEventPublisher } from "../../domain/events/publishers/registered-new-item.event-publisher";
@@ -32,9 +33,14 @@ export class ItemController {
      */
     @Post()
     async registerItem(@Body() command: IcreateItemCommand): Promise<IcreateItemResponse> {
+        axios.get('https://api.chucknorris.io/jokes/random')
+            .then(function (response) {
+                console.log(response.data.value);
+            })
         const useCase = new CreateItemUseCase(
             this.itemService,
             this.registerNewItemEventPublisher);
+
         return await useCase.execute(command);
     }
     /**
