@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import axios from "axios";
 import { CreateItemUseCase } from "../../application/use-case/create-item/create-item.use-case";
 import { GetItemUseCase } from "../../application/use-case/get-item/get-item-use-case";
@@ -10,6 +11,8 @@ import { IGetItemResponse } from "../../domain/interfaces/responses/get-item.res
 import { GetItemPublisher } from "../messaging/publisher/got-item.publisher";
 import { RegisterItemPublisher } from "../messaging/publisher/registered-new-item.publisher";
 import { ItemService } from "../persistence/services/item.service";
+import { CreateItemCommand } from "../persistence/utils/commands/create-item.command";
+import { GetItemCommand } from "../persistence/utils/commands/get-item.command";
 
 /**
  *
@@ -18,6 +21,7 @@ import { ItemService } from "../persistence/services/item.service";
  * @class ItemController el controlador de item
  */
 @Controller('item')
+@ApiTags('item')
 export class ItemController {
     constructor(
         private readonly itemService: ItemService,
@@ -32,7 +36,10 @@ export class ItemController {
      * @memberof ItemController
      */
     @Post()
-    async registerItem(@Body() command: IcreateItemCommand): Promise<IcreateItemResponse> {
+    @ApiOperation({ summary: 'por medio de este endpoint puedo insetar los objetos de valor de una entidad item' })
+    @ApiResponse({ status: 201, description: 'el item se inserto correctamente', type: CreateItemCommand})
+    @ApiResponse({ status: 404, description: 'el item no se pudo insertar' })
+    async registerItem(@Body() command: CreateItemCommand): Promise<IcreateItemResponse> {
         axios.get('https://api.chucknorris.io/jokes/random')
             .then(function (response) {
                 console.log(response.data.value);
@@ -51,7 +58,10 @@ export class ItemController {
      * @memberof ItemController
      */
     @Get('obtener')
-    async getItems(@Body() command: IGetItemCommand): Promise<IGetItemResponse> {
+    @ApiOperation({ summary: 'por medio de este endpoint puedo obtener los objetos de valor de una entidad item' })
+    @ApiResponse({ status: 200, description: 'el item se obtuvo correctamente', type: GetItemCommand })
+    @ApiResponse({ status: 404, description: 'el item no se encontro' })
+    async getItems(@Body() command: GetItemCommand): Promise<IGetItemResponse> {
         const useCase = new GetItemUseCase(
             this.itemService,
             this.gotItemEventPublisher);
